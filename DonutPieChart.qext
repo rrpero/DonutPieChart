@@ -1,0 +1,11 @@
+{
+    "name" : "DonutPie Chart",
+    "description" : "Donut/Pie Chart With Options to customize based on RGraph  library  and https://github.com/ardwork/PieCharts-RGraph",
+    "icon" : "pie-chart",
+    "type" : "visualization",
+    "version": "1.0.0",
+    "preview" : "pie-chart",
+    "author": "Ruben Albuquerque"
+}
+
+
