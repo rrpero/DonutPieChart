@@ -74,6 +74,11 @@ define( [
 			var	paletteBlue=["#051D5C","#0F2662","#193068","#23396E","#2D4374","#374C7A","#415680","#4C5F86","#56698C","#607292","#6A7C98","#74859E","#7E8FA4","#8998AA","#93A2B0","#9DABB6","#A7B5BC","#B1BEC2","#BBC8C8","#C5D2CF"];
 			var paletteGreen=["#034502","#0D4C0C","#185316","#225B20","#2D622B","#376A35","#42713F","#4C784A","#578054","#61875E","#6C8F69","#769673","#819E7D","#8BA588","#96AC92","#A0B49C","#ABBBA7","#B5C3B1","#C0CABB","#CBD2C6"];
 			var paletteRed=["#940005","#97090D","#9B1216","#9F1C1F","#A32528","#A62E31","#AA383A","#AE4142","#B24A4B","#B65454","#B95D5D","#BD6766","#C1706F","#C57977","#C98380","#CC8C89","#D09592","#D49F9B","#D8A8A4","#DCB2AD"];
+			
+			var paletteYellowWhite =["#ffc22b","#ffffff","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
+			
+			var paletteWhiteYellow =["#ffffff","#ffc22b","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];			
+			
 			if(numberOfDimValues<=6){
 				paletteBlue=["#051D5C","#2D4374","#56698C","#7E8FA4","#A7B5BC","#C5D2CF"];
 				paletteGreen=["#034502","#2D622B","#578054","#819E7D","#ABBBA7","#CBD2C6"];
@@ -92,23 +97,29 @@ define( [
 			else if(layout.palette=="redgradient")
 				palette=paletteRed;
 			else if(layout.palette=="greengradient")
-				palette=paletteGreen;			
+				palette=paletteGreen;
+			else if(layout.palette=="yellowwhite")
+				palette=paletteYellowWhite;	
+			else if(layout.palette=="whiteyellow")
+				palette=paletteWhiteYellow;				
 			
+			/** TODO Pedir decimal e milhar do QS **/
 			for (var i=0; i<numberOfDimValues;i++){
 				dimArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][0].qText;
 				measArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText;
-				total=total+parseFloat(measArray[i]);
+				total=total+parseFloat(measArray[i].replace(",","."));
+				//console.log(parseFloat(measArray[i]));
 				dimMeasArray[i] = dimArray[i] + " \n " +measArray[i];
 				dimMeasTPArray[i] = dimArray[i] + " </br>- " +measArray[i];
 			}
-			
+			//console.log(total);
 			
 			var dimMeasPercArray=[];
 			var dimMeasPercTPArray=[];			
 			for (var i=0; i<numberOfDimValues;i++){
-				var measPercArray = (parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText)/total)*100;
+				var measPercArray = (parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",","."))/total)*100;
 				
-				measPercArray= parseFloat(measPercArray).toFixed(2);
+				measPercArray= parseFloat(measPercArray).toFixed(1);
 
 				dimMeasPercArray[i] = dimArray[i] + " \n " +measPercArray + "%";
 				dimMeasPercTPArray[i] = dimensionName+'</br>' +
@@ -240,7 +251,7 @@ define( [
 			var testRadius = width;
 			if(width>height)
 				testRadius=height;
-			testRadius=testRadius*(layout.chartRadius/100);
+			testRadius=testRadius*(layout.chartRadius/75);
 			//console.log(testRadius);
 			//layout.chartRadius = (layout.chartRadius/300)*testRadius;
 			//testRadius=(layout.chartRadius/300)*testRadius;
@@ -257,8 +268,8 @@ define( [
 				testDonut = (0.30*testRadius)-1;
 
 			var labelTextSize = parseInt(testRadius*0.02);
-			if(labelTextSize< 9)
-				labelTextSize=9;
+			if(labelTextSize< 7)
+				labelTextSize=7;
 			switch(chartTypeEffect) {
 				// Draws 3d pie chart
 				case "Default":
@@ -304,7 +315,13 @@ define( [
 							
 							//eventsMousemove: onMouseMove,
 						}
-					}).draw();
+					});
+					//var animation=true;
+					if(layout.animation)//.grow();
+						chart.roundRobin({frames: 30});
+					else
+						chart.draw();
+					//.draw();
 					
 
 					

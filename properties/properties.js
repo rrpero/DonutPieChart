@@ -78,7 +78,20 @@ define( [
 			defaultValue: "2d"
 	};
 	
-		
+	var chartAnimation = {
+			type: "boolean",
+			component: "switch",
+			label: "Animation",
+			ref: "animation",
+			options: [{
+				value: true,
+				label: "On"
+			}, {
+				value: false,
+				label: "Off"
+			}],
+			defaultValue: false
+	};	
 		
 	var chartLabels = {
 			type: "boolean",
@@ -290,6 +303,12 @@ define( [
 			},{
 				value: "greengradient",
 				label: 'Green Gradient'
+			},{
+				value: "yellowwhite",
+				label: 'Yellow-White'
+			},{
+				value: "whiteyellow",
+				label: 'White-Yellow'
 			}
 			
 			],
@@ -302,6 +321,7 @@ define( [
 		items: {
 			showValues:showValues,
 			chartType:chartType,
+			chartAnimation:chartAnimation,
 			chartRadius:chartRadius,
 			donutWidth:donutWidth,
 			chartEffect:chartEffect,
