@@ -425,9 +425,9 @@ define( [
 					
 					
 					
-					var x = (chart.canvas.width / 2)+layout.textPosX;
+					var x = (chart.canvas.width / 2)+((layout.textPosX/100)*chart.canvas.width);
 					//var y = chart.get('gutterTop') + 5;
-					var y = ((chart.canvas.height / 2)*0.80)+layout.textPosY;
+					var y = ((chart.canvas.height / 2)*0.80)+((layout.textPosY/100)*chart.canvas.height);
 					//console.log(layout.textPosX);
 					//console.log(layout.textPosY);
 					var textSizeBase = parseInt(testRadius*0.05*(layout.sizeText/100));
