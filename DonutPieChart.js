@@ -245,13 +245,20 @@ define( [
 			//layout.chartRadius = (layout.chartRadius/300)*testRadius;
 			//testRadius=(layout.chartRadius/300)*testRadius;
 			RGraph.Reset(document.getElementById(tmpCVSID));
-		
-			var testDonut = layout.donutWidth;
+
+			console.log(testDonut);
+			console.log(testRadius);
+			var testDonut=testRadius*0.1*(layout.donutWidth/100);
+			
+			//var testDonut = layout.donutWidth;
 			if(testDonut <= 0)
 				testDonut = 1;
 			if(testDonut >= 0.30*testRadius)
 				testDonut = (0.30*testRadius)-1;
-			
+
+			var labelTextSize = parseInt(testRadius*0.03);
+			if(labelTextSize< 9)
+				labelTextSize=9;
 			switch(chartTypeEffect) {
 				// Draws 3d pie chart
 				case "Default":
@@ -264,7 +271,7 @@ define( [
 							gutterTop: 30,
 							gutterBottom: 50, 
 							linewidth: layout.segmentBorderWidth,
-							textSize: 9,
+							textSize: labelTextSize,
 							textColor: '#aaa',
 							halign: 'center',
 							strokestyle: segmentBorder2,
@@ -281,6 +288,7 @@ define( [
 							//radius: layout.chartRadius,
 							radius: 0.30*testRadius,
 							labelsSticksList: layout.labelSticks,
+							labelsSticksBold: true,
 							//labelsSticksColors: [,'#cc0',,,'#0f0',,'black'],
 							labelsSticksColors:'#aaa',
 							//radius: 80,
@@ -290,7 +298,8 @@ define( [
 							// ********************** you can change which segment explodes here, the first dimension in order is currently set [20,,] to explode by 20 pixels
 							exploded: explodeSegment2,
 							textAccessible: false,
-							eventsClick: onClickDimension,
+							eventsClick: onClickDimension
+							,
 							variantDonutWidth:testDonut
 							
 							//eventsMousemove: onMouseMove,
@@ -312,7 +321,7 @@ define( [
 							gutterTop: 30,
 							gutterBottom: 50,
 							linewidth: layout.segmentBorderWidth,
-							textSize: 9,
+							textSize: labelTextSize,
 							textColor: '#9fcfff',
 							strokestyle: segmentBorder2,
 							//tooltips: layout.showValues ? dimMeasTPArray : dimArray,
@@ -329,6 +338,7 @@ define( [
 							radius: 0.30*testRadius,
 							//width: 50,
 							labelsSticksList: layout.labelSticks,
+							labelsSticksBold: true,
 							labelsSticksColors: '#aaa',
 							//radius: 80,
 							shadowOffsety: 0,
@@ -379,14 +389,12 @@ define( [
 					
 					var x = (chart.canvas.width / 2)+layout.textPosX;
 					//var y = chart.get('gutterTop') + 5;
-					var y = ((chart.canvas.height / 2)*0.85)+layout.textPosY;
+					var y = ((chart.canvas.height / 2)*0.80)+layout.textPosY;
 					//console.log(layout.textPosX);
 					//console.log(layout.textPosY);
-					var sizeTextTest= (parseInt(chart.canvas.width / 25))+2;
-					if(sizeTextTest>25)
-						sizeTextTest=25;					
-					if(layout.sizeText)
-						sizeTextTest = layout.sizeText;
+					var textSizeBase = parseInt(testRadius*0.05*(layout.sizeText/100));
+					
+					var sizeTextTest= textSizeBase;
 
 
 					

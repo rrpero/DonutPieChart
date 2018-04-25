@@ -166,15 +166,15 @@ define( [
 
 		var sizeText = {
 			type: "integer",
-			label: "Size Text(0 to auto adjust)",
+			label: "Text % Size",
 			ref: "sizeText",
 			//expression: "always",
-			defaultValue: 14
+			defaultValue: 100
 	};
 	
 		var textPosX = {
 			type: "integer",
-			label: "Text Pos X",
+			label: "Text Pos X(Can be Negative)",
 			ref: "textPosX",
 			//expression: "always",
 			defaultValue: 0
@@ -182,7 +182,7 @@ define( [
 	
 		var textPosY = {
 			type: "integer",
-			label: "Text Pos Y",
+			label: "Text Pos Y(Can be Negative)",
 			ref: "textPosY",
 			//expression: "always",
 			defaultValue: 0
@@ -190,7 +190,7 @@ define( [
 
 	var chartRadius = {
 			type: "integer",
-			label: "Chart Radius",
+			label: "Chart Radius % Size",
 			ref: "chartRadius",
 			//expression: "always",
 			defaultValue: 100
@@ -198,10 +198,10 @@ define( [
 
 	var donutWidth = {
 			type: "integer",
-			label: "Donut Width",
+			label: "Donut Width % Size",
 			ref: "donutWidth",
 			//expression: "always",
-			defaultValue: 30
+			defaultValue: 100
 	};		
 	
 	var colorText = {
