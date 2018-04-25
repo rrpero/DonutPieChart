@@ -169,6 +169,26 @@ define( [
 			defaultValue: false
 	};
 	
+	var segmentBorderInOne = {
+			type: "string",
+			component: "dropdown",
+			label: "Border One Dimension",
+			ref: "segmentBorderInOne",
+			options: [{
+				value: "no",
+				label: 'No'
+			},{
+				value: "1",
+				label: 'First Dimension Value'
+			}, {
+				value: "2",
+				label: 'Second Dimension Value'
+			}
+			
+			],
+			defaultValue: "no"
+	};	
+	
 	var textMiddle = {
 			type: "string",
 			label: "Text Center(type \\n to  break  line)",
@@ -226,6 +246,8 @@ define( [
 			defaultValue: "#ffffff"
 	};	
 	
+	
+	
 	var showValues = {
 			type: "string",
 			component: "dropdown",
@@ -254,6 +276,9 @@ define( [
 			label: "Segment Border Width",
 			ref: "segmentBorderWidth",
 			options: [{
+				value: 1,
+				label: '1 pixels'
+			},{
 				value: 2,
 				label: '2 pixels'
 			}, {
@@ -309,6 +334,18 @@ define( [
 			},{
 				value: "whiteyellow",
 				label: 'White-Yellow'
+			},{
+				value: "bluewhite",
+				label: 'Blue-White'
+			},{
+				value: "whiteblue",
+				label: 'White-Blue'
+			},{
+				value: "redwhite",
+				label: 'Red-White'
+			},{
+				value: "whitered",
+				label: 'White-Red'
 			}
 			
 			],
@@ -329,6 +366,7 @@ define( [
 			labelSticks:labelSticks,
 			explodeSegment:explodeSegment,
 			segmentBorder:segmentBorder,
+			segmentBorderInOne:segmentBorderInOne,
 			segmentBorderWidth:segmentBorderWidth,
 			palette:palette
 		}

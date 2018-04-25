@@ -75,9 +75,17 @@ define( [
 			var paletteGreen=["#034502","#0D4C0C","#185316","#225B20","#2D622B","#376A35","#42713F","#4C784A","#578054","#61875E","#6C8F69","#769673","#819E7D","#8BA588","#96AC92","#A0B49C","#ABBBA7","#B5C3B1","#C0CABB","#CBD2C6"];
 			var paletteRed=["#940005","#97090D","#9B1216","#9F1C1F","#A32528","#A62E31","#AA383A","#AE4142","#B24A4B","#B65454","#B95D5D","#BD6766","#C1706F","#C57977","#C98380","#CC8C89","#D09592","#D49F9B","#D8A8A4","#DCB2AD"];
 			
-			var paletteYellowWhite =["#ffc22b","#ffffff","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
+			var paletteYellowWhite =["#ffc22b","rgba(0,0,0,0)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
 			
-			var paletteWhiteYellow =["#ffffff","#ffc22b","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];			
+			var paletteWhiteYellow =["rgba(0,0,0,0)","#ffc22b","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
+
+			var paletteBlueWhite =["RGB(141,170,203)","rgba(0,0,0,0)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];			
+			var paletteWhiteBlue =["rgba(0,0,0,0)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
+			
+			var paletteRedWhite =["RGB(252,115,98)","rgba(0,0,0,0)","RGB(141,170,203)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];
+			
+			
+			var paletteWhiteRed =["rgba(0,0,0,0)","RGB(252,115,98)","RGB(141,170,203)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];			
 			
 			if(numberOfDimValues<=6){
 				paletteBlue=["#051D5C","#2D4374","#56698C","#7E8FA4","#A7B5BC","#C5D2CF"];
@@ -102,7 +110,14 @@ define( [
 				palette=paletteYellowWhite;	
 			else if(layout.palette=="whiteyellow")
 				palette=paletteWhiteYellow;				
-			
+			else if(layout.palette=="redwhite")
+				palette=paletteRedWhite;	
+			else if(layout.palette=="whitered")
+				palette=paletteWhiteRed;	
+			else if(layout.palette=="bluewhite")
+				palette=paletteBlueWhite;	
+			else if(layout.palette=="whiteblue")
+				palette=paletteWhiteBlue;				
 			/** TODO Pedir decimal e milhar do QS **/
 			for (var i=0; i<numberOfDimValues;i++){
 				dimArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][0].qText;
@@ -154,9 +169,10 @@ define( [
 			switch(layout.explodeSegment) {
 				case 0:
 					var explodeSegment2 = [0];
+					
 					break;
 				case 1:
-					var explodeSegment2 = [20];
+					var explodeSegment2 = [20];					
 					break;
 				case 2:
 					var explodeSegment2 = [0,20];
@@ -176,6 +192,11 @@ define( [
 			// set segment border color to allow border to switch on and off
 			if (layout.segmentBorder) {
 				var segmentBorder2 = '#fff';
+				
+				if(layout.segmentBorderInOne=="1")
+					segmentBorder2 = ['black', 'rgba(0,0,0,0)'];
+				else if (layout.segmentBorderInOne=="2")
+					segmentBorder2 = ['rgba(0,0,0,0)', 'black'];
 			} else {
 				var segmentBorder2 = 'rgba(0,0,0,0)';
 			}
@@ -267,7 +288,7 @@ define( [
 			if(testDonut >= 0.30*testRadius)
 				testDonut = (0.30*testRadius)-1;
 
-			var labelTextSize = parseInt(testRadius*0.02);
+			var labelTextSize = parseInt(testRadius*0.03);
 			if(labelTextSize< 7)
 				labelTextSize=7;
 			switch(chartTypeEffect) {
