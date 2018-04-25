@@ -158,7 +158,7 @@ define( [
 	
 	var textMiddle = {
 			type: "string",
-			label: "Text Middle",
+			label: "Text Center(type \\n to  break  line)",
 			ref: "textMiddle",
 			expression: "always",
 			defaultValue: ""
