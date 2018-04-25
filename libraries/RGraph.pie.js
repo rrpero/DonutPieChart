@@ -865,7 +865,7 @@
                         var x = this.coordsSticks[i][4][0] + (x < cx ? -5 : 5),
                             y = this.coordsSticks[i][4][1];
                     }
-					console.log(labels[i]+" x " + x + " y  "  +y);
+					//console.log(labels[i]+" x " + x + " y  "  +y);
 					if(y>(cy+(r*0.85)))
 						y=y+(0.06*r);
 					else if (y<(cy-(r*0.85)))

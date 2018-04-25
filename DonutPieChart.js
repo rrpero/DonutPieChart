@@ -246,8 +246,8 @@ define( [
 			//testRadius=(layout.chartRadius/300)*testRadius;
 			RGraph.Reset(document.getElementById(tmpCVSID));
 
-			console.log(testDonut);
-			console.log(testRadius);
+			//console.log(testDonut);
+			//console.log(testRadius);
 			var testDonut=testRadius*0.1*(layout.donutWidth/100);
 			
 			//var testDonut = layout.donutWidth;
@@ -256,7 +256,7 @@ define( [
 			if(testDonut >= 0.30*testRadius)
 				testDonut = (0.30*testRadius)-1;
 
-			var labelTextSize = parseInt(testRadius*0.03);
+			var labelTextSize = parseInt(testRadius*0.02);
 			if(labelTextSize< 9)
 				labelTextSize=9;
 			switch(chartTypeEffect) {
