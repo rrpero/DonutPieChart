@@ -238,8 +238,8 @@ define( [
 			label: "Text Pos X(Can be Negative)",
 			ref: "textPosX",
 			component: "slider",
-			min: -50,
-			max: 50,
+			min: -150,
+			max: 150,
 			step: 1,			
 			//expression: "always",
 			defaultValue: 0
@@ -250,11 +250,11 @@ define( [
 			label: "Text Pos Y(Can be Negative)",
 			ref: "textPosY",
 			component: "slider",
-			min: -50,
-			max: 50,
+			min: -155,
+			max: 145,
 			step: 1,			
 			//expression: "always",
-			defaultValue: 0
+			defaultValue: -5
 	};		
 
 	var chartRadius = {
@@ -510,9 +510,9 @@ define( [
 			label: "Position X",
 			ref: "keyPositionX",
 			component: "slider",
-			min: -100,
-			max: 100,
-			step: 1,
+			min: -300,
+			max: 300,
+			step: 3,
 			//expression: "always",
 			defaultValue: 0
 	};	
@@ -521,11 +521,11 @@ define( [
 			label: "Position Y",
 			ref: "keyPositionY",
 			component: "slider",
-			min: -100,
-			max: 100,
+			min: -300,
+			max: 300,
 			step: 1,
 			//expression: "always",
-			defaultValue: 0
+			defaultValue: 3
 	};		
 
 	var showLegends = {
@@ -549,11 +549,11 @@ define( [
 			label: "Align",
 			ref: "keyHalign",
 			options: [{
-				value: "right",
-				label: "Right"
-			}, {
 				value: "left",
 				label: "Left"
+			},{
+				value: "right",
+				label: "Right"
 			}],
 			defaultValue: false
 	};	

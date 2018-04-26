@@ -178,12 +178,24 @@
             * Specific location coordinates
             */
             if (typeof(prop['chart.key.position.x']) == 'number') {
-                hpos = hpos+((prop['chart.key.position.x']/100)*ca.width);
+                if(obj.radius){
+					//hpos = hpos+((prop['chart.key.position.x']/100)*(obj.radius/2));
+					
+					hpos=obj.centerx +prop['chart.key.position.x']*(obj.radius/100);
+				}
+				else{
+					hpos = hpos+((prop['chart.key.position.x']/100)*ca.width);
+				}
             }
             
             if (typeof(prop['chart.key.position.y']) == 'number') {
                 //vpos = vpos+prop['chart.key.position.y'];
-				vpos = vpos+((prop['chart.key.position.y']/100)*(ca.height+gutterTop+10));
+				if(obj.radius){
+					//vpos = vpos+((prop['chart.key.position.y']/100)*((obj.radius/2)+gutterTop+10));
+					vpos=obj.centery +prop['chart.key.position.y']*(obj.radius/100);
+				}
+				else
+					vpos = vpos+((prop['chart.key.position.y']/100)*(ca.height+gutterTop+10));
             }
     
     

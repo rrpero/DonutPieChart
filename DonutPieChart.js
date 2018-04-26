@@ -508,12 +508,13 @@ define( [
 					var x = (chart.canvas.width / 2)+(layout.textPosX);
 					//console.log(x);
 					//console.log(layout.textPosX);
-					x=x;
+					x=chart.centerx +layout.textPosX*(testRadius/100);
 					//console.log(x);
 					//var y = chart.get('gutterTop') + 5;
 					//var y = ((chart.canvas.height / 2)*0.80)+((layout.textPosY/100)*chart.canvas.height);
-					var y = (((chart.canvas.height) / 2))+(layout.textPosY);
-					console.log(y);
+					//var y = (((chart.canvas.height) / 2))+(layout.textPosY);
+					var y = chart.centery + layout.textPosY*(testRadius/100);
+					//console.log(y);
 					//y=y-50;
 					//y=y+layout.gutterTop;
 					//console.log(layout.textPosX);
