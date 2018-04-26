@@ -83,6 +83,7 @@
             'chart.linewidth':              3,
             'chart.labels':                 [],
             'chart.labels.bold':            false,
+			'chart.labels.distance':            10,
             'chart.labels.sticks':          false,
             'chart.labels.sticks.length':   7,
             'chart.labels.sticks.colors':   null,
@@ -852,8 +853,13 @@
                     /**
                     * Coords for the text
                     */
-                    var x = cx + explosion_offsetx + ((r + 10)* Math.cos(a)) + (prop['chart.labels.sticks'] ? (a < RG.HALFPI || a > (RG.TWOPI + RG.HALFPI) ? 2 : -2) : 0),
-                        y = cy + explosion_offsety + (((r + 10) * Math.sin(a)));
+					//console.log("raio é " + r);
+					var rbase = r;
+					if(r<120)
+						rbase=rbase*0.95;
+						
+                    var x = cx + explosion_offsetx + ((rbase + prop['chart.labels.distance'])* Math.cos(a)) + (prop['chart.labels.sticks'] ? (a < RG.HALFPI || a > (RG.TWOPI + RG.HALFPI) ? 2 : -2) : 0),
+                        y = cy + explosion_offsety + (((rbase + prop['chart.labels.distance']) * Math.sin(a)));
 
 
 
@@ -866,10 +872,10 @@
                             y = this.coordsSticks[i][4][1];
                     }
 					//console.log(labels[i]+" x " + x + " y  "  +y);
-					if(y>(cy+(r*0.85)))
-						y=y+(0.06*r);
-					else if (y<(cy-(r*0.85)))
-						y=y-(0.06*r);
+					if(y>(cy+(r*0.98)))
+						y=y+(0.05*r);
+					else if (y<(cy-(r*0.96)))
+						y=y-(0.09*r);
 
                     /**
                     * Alignment
@@ -894,6 +900,8 @@
                         halign: hAlignment,
                            tag: 'labels',
                           bold: bold,
+						 // bounding:true,
+						 // boundingStroke:"white",
                          color: prop['chart.labels.sticks.usecolors'] ? prop['chart.colors'][i] : 'black'
                     });
                 }

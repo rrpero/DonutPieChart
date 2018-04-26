@@ -13,7 +13,9 @@ define( [
 		,'./libraries/RGraph.common.tooltips'
 		,'./libraries/RGraph.common.resizing'
 		,'./libraries/RGraph.drawing.text'
+		,'./libraries/RGraph.drawing.rect'
 		,'./libraries/RGraph.pie'  
+		,'./libraries/RGraph.common.key'
 		
     ],
 	
@@ -39,6 +41,9 @@ define( [
 
 			//paint function creates the visualisation. - this one makes a very basic table with no selections etc.
             paint: function ($element, layout) {
+				
+				
+
 			//debug propose only, please comment
 			//console.log('Data returned: ', layout.qHyperCube);
 			
@@ -129,13 +134,23 @@ define( [
 			}
 			//console.log(total);
 			
+			//% to Only Values
+			var measArrayPerc = [];
+			var measArrayValue = [];
+			
 			var dimMeasPercArray=[];
 			var dimMeasPercTPArray=[];			
 			for (var i=0; i<numberOfDimValues;i++){
 				var measPercArray = (parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",","."))/total)*100;
 				
 				measPercArray= parseFloat(measPercArray).toFixed(1);
-
+				
+				
+				
+				measArrayPerc[i]=measPercArray + "%";
+				measArrayValue[i]=layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
+				
+				
 				dimMeasPercArray[i] = dimArray[i] + " \n " +measPercArray + "%";
 				dimMeasPercTPArray[i] = dimensionName+'</br>' +
 										'<div style="color:' + palette[i]+';">' + dimArray[i]+": " +measArray[i]+"</div>" +
@@ -210,9 +225,13 @@ define( [
 				
 				if(layout.showValues=="value"||layout.showValues=="percent"){
 					var labelsArray = dimMeasArray;
+					if(layout.onlyValues)
+						labelsArray=measArrayValue;
 					//var labelDimMeasArray =dimMeasTPArray;		
 					if(layout.showValues=="percent"){
 						var labelsArray = dimMeasPercArray;
+						if(layout.onlyValues)
+							labelsArray=measArrayPerc;						
 						//var labelDimMeasArray = dimMeasPercTPArray;
 					}					
 				}
@@ -268,7 +287,31 @@ define( [
 			html+='<div id="canvas-wrapper"><canvas id="' + tmpCVSID + '" width="'+width+'" height="'+height+'">[No canvas support]</canvas></div>';
 
 			$element.html(html);
+			
+			
+			if(typeof(layout.gutterTop) == "undefined")
+				layout.gutterTop=30;			
+			if(typeof(layout.gutterLeft) == "undefined")
+				layout.gutterLeft=100;
+			if(typeof(layout.chartRadius) == "undefined")
+				layout.chartRadius=100;			
+			if(typeof(layout.donutWidth) == "undefined")
+				layout.donutWidth=100;	
+			if(typeof(layout.labelTextSize) == "undefined")
+				layout.labelTextSize=100;	
+			if(typeof(layout.segmentBorderWidth) == "undefined")
+				layout.segmentBorderWidth=5;		
+			if(typeof(layout.labelDistance) == "undefined")
+				layout.labelDistance=10;
+			if(typeof(layout.keyHalign) == "undefined")
+				layout.keyHalign="right";	
+			if(typeof(layout.keyPositionX) == "undefined")
+				layout.keyPositionX=0;	
+			if(typeof(layout.keyPositionY) == "undefined")
+				layout.keyPositionY=0;				
 
+			
+			
 			var testRadius = width;
 			if(width>height)
 				testRadius=height;
@@ -288,9 +331,15 @@ define( [
 			if(testDonut >= 0.30*testRadius)
 				testDonut = (0.30*testRadius)-1;
 
-			var labelTextSize = parseInt(testRadius*0.03);
+			var labelTextSize = parseInt(testRadius*0.04)*(layout.labelTextSize/100);
 			if(labelTextSize< 7)
 				labelTextSize=7;
+
+
+			
+			//console.log(layout.gutterLeft);
+			//console.log(layout.gutterTop);
+			
 			switch(chartTypeEffect) {
 				// Draws 3d pie chart
 				case "Default":
@@ -298,9 +347,9 @@ define( [
 						id: tmpCVSID,
 						data: measArray,
 						options: {
-							gutterLeft: 100,
+							gutterLeft: layout.gutterLeft,
 							gutterRight: 100,
-							gutterTop: 30,
+							gutterTop: layout.gutterTop,
 							gutterBottom: 50, 
 							linewidth: layout.segmentBorderWidth,
 							textSize: labelTextSize,
@@ -309,12 +358,26 @@ define( [
 							strokestyle: segmentBorder2,
 							//tooltips: layout.showValues ? dimMeasTPArray : dimArray,
 							tooltips: labelDimMeasArray,
-							tooltipsEvent: 'onmousemove',					
+							tooltipsEvent: 'onmousemove',
+							/*Nao  funciona  ainda
+							tooltipsOverride: tooltip_override,
+							*/							
 							//labels: layout.showValues ? labelDimMeasArray : labelsArray,	
-							labels: labelsArray,				
+							labels: labelsArray,
+							key:layout.showLegends ? dimArray: null,
+							keyHalign:layout.keyHalign,
+							keyPositionX:layout.keyPositionX,
+							keyPositionY:layout.keyPositionY,
+							keyPositionGraphBoxed:false,
+							keyPosition:'graph',
+							keyTextBold:true,
+							keyTextSize:labelTextSize-2,
+							//keyInteractive: true,
+							labelsDistance:layout.labelDistance,
 							colors: palette,
 							labelsColors:palette,
 							labelsSticksUsecolors:true,
+							
 							labelsBold:true,
 							variant: chartVariant,
 							//radius: layout.chartRadius,
@@ -354,9 +417,9 @@ define( [
 						id: tmpCVSID,
 						data: measArray,
 						options: {
-							gutterLeft: 100,
+							gutterLeft: layout.gutterLeft,
 							gutterRight: 100,
-							gutterTop: 30,
+							gutterTop: layout.gutterTop,
 							gutterBottom: 50,
 							linewidth: layout.segmentBorderWidth,
 							textSize: labelTextSize,
@@ -366,7 +429,16 @@ define( [
 							tooltips: labelDimMeasArray,
 							tooltipsEvent: 'onmousemove',					
 							//labels: layout.showValues ? labelDimMeasArray : labelsArray,					
-							labels: labelsArray,					
+							labels: labelsArray,
+							key:layout.showLegends ? dimArray: null,
+							keyHalign:layout.keyHalign,
+							keyPositionX:layout.keyPositionX,
+							keyPositionY:layout.keyPositionY,
+							keyPositionGraphBoxed:false,
+							keyPosition:'graph',
+							keyTextBold:true,
+							keyTextSize:labelTextSize-2,							
+							labelsDistance:layout.labelDistance,							
 							colors: palette,
 							labelsColors:palette,
 							labelsSticksUsecolors:true,
@@ -401,7 +473,13 @@ define( [
 								
 								
 
-							}).draw();
+							});
+							
+					if(layout.animation)//.grow();
+						chart.roundRobin({frames: 30});
+					else
+						chart.draw();
+							//.draw();
 							
 	
 								
@@ -410,6 +488,7 @@ define( [
 					
 			}
 			
+	
 			
 			chart.canvas.onmouseout = function (e)
 			{
@@ -425,9 +504,18 @@ define( [
 					
 					
 					
-					var x = (chart.canvas.width / 2)+((layout.textPosX/100)*chart.canvas.width);
+					//var x = (chart.canvas.width / 2)+((layout.textPosX/100)*chart.canvas.width);
+					var x = (chart.canvas.width / 2)+(layout.textPosX);
+					//console.log(x);
+					//console.log(layout.textPosX);
+					x=x;
+					//console.log(x);
 					//var y = chart.get('gutterTop') + 5;
-					var y = ((chart.canvas.height / 2)*0.80)+((layout.textPosY/100)*chart.canvas.height);
+					//var y = ((chart.canvas.height / 2)*0.80)+((layout.textPosY/100)*chart.canvas.height);
+					var y = (((chart.canvas.height) / 2))+(layout.textPosY);
+					console.log(y);
+					//y=y-50;
+					//y=y+layout.gutterTop;
 					//console.log(layout.textPosX);
 					//console.log(layout.textPosY);
 					var textSizeBase = parseInt(testRadius*0.05*(layout.sizeText/100));
@@ -469,8 +557,18 @@ define( [
 			
 			
 			
-			
-			
+			/*Não funciona  ainda
+			function tooltip_override (obj, text, x, y, idx,e,r)
+			{
+				if(idx==0){
+					console.log("esse foi " +  y + " " + x + r);
+					return true;
+				}
+				obj.tooltip(obj, text, 50, 50, idx);
+				
+				// Redraw the canvas so that any highlighting is gone
+				obj.draw();
+			}*/			
 			
 			
 			
@@ -480,15 +578,19 @@ define( [
 				var index = shape.index;
 				//alert(dimensionName);
 				//console.log(shape);
-				app.field(dimensionName).toggleSelect(dimArray[index], true);
+				//if(index==1)
+					app.field(dimensionName).toggleSelect(dimArray[index], true);
+				return  true;
 			}	
 			
 			// On Mouse Over actions
 			function onMouseMove (e, shape)
 			{
+				console.log("aaa");
 				var index = shape.index;
 				//self.backendApi.selectValues(0, dimArray[index], true);
-				app.field(dimensionName).toggleSelect(dimArray[index], true);
+				//if(index==1)
+					app.field(dimensionName).toggleSelect(dimArray[index], true);
 				return true;
 			}					
 			

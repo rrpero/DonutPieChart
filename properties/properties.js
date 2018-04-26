@@ -108,6 +108,30 @@ define( [
 			defaultValue: true
 	};
 	
+		var labelTextSize = {
+			type: "integer",
+			label: "Label Text % Size",
+			ref: "labelTextSize",
+			component: "slider",
+			min: 10,
+			max: 200,
+			step: 1,			
+			//expression: "always",
+			defaultValue: 100
+	};	
+	
+		var labelDistance = {
+			type: "integer",
+			label: "Label Distance",
+			ref: "labelDistance",
+			component: "slider",
+			min: -100,
+			max: 100,
+			step: 1,			
+			//expression: "always",
+			defaultValue: 10
+	};		
+	
 	var labelSticks = {
 			type: "boolean",
 			component: "switch",
@@ -201,6 +225,10 @@ define( [
 			type: "integer",
 			label: "Text % Size",
 			ref: "sizeText",
+			component: "slider",
+			min: 10,
+			max: 200,
+			step: 1,			
 			//expression: "always",
 			defaultValue: 100
 	};
@@ -209,6 +237,10 @@ define( [
 			type: "integer",
 			label: "Text Pos X(Can be Negative)",
 			ref: "textPosX",
+			component: "slider",
+			min: -50,
+			max: 50,
+			step: 1,			
 			//expression: "always",
 			defaultValue: 0
 	};	
@@ -217,6 +249,10 @@ define( [
 			type: "integer",
 			label: "Text Pos Y(Can be Negative)",
 			ref: "textPosY",
+			component: "slider",
+			min: -50,
+			max: 50,
+			step: 1,			
 			//expression: "always",
 			defaultValue: 0
 	};		
@@ -225,6 +261,10 @@ define( [
 			type: "integer",
 			label: "Chart Radius % Size",
 			ref: "chartRadius",
+			component: "slider",
+			min: 10,
+			max: 200,
+			step: 1,			
 			//expression: "always",
 			defaultValue: 100
 	};
@@ -233,9 +273,15 @@ define( [
 			type: "integer",
 			label: "Donut Width % Size",
 			ref: "donutWidth",
+			component: "slider",
+			min: 10,
+			max: 200,
+			step: 1,
 			//expression: "always",
 			defaultValue: 100
 	};		
+	
+
 	
 	var colorText = {
 			type: "string",
@@ -267,6 +313,21 @@ define( [
 			],
 			defaultValue: "no"
 	};
+	var onlyValues = {
+			type: "boolean",
+			component: "switch",
+			label: "Only Values",
+			ref: "onlyValues",
+			options: [{
+				value: true,
+				label: "On"
+			}, {
+				value: false,
+				label: "Off"
+			}],
+			defaultValue: false
+	};	
+	
 
 
 	
@@ -352,26 +413,82 @@ define( [
 			defaultValue: "default"
 	};	
 	
+	var gutterTop = {
+			type: "integer",
+			label: "Top",
+			ref: "gutterTop",
+			component: "slider",
+			min: -20,
+			max: 100,
+			step: 1,
+			//expression: "always",
+			defaultValue: 30
+	};
+	
+	var gutterLeft = {
+			type: "integer",
+			label: "Left",
+			ref: "gutterLeft",
+			component: "slider",
+			min: -20,
+			max: 200,
+			step: 1,
+			//expression: "always",
+			defaultValue: 100
+	};	
+	
 	var Options = {
 		type:"items",
 		label:"Options",
-		items: {
-			showValues:showValues,
+		items: {			
 			chartType:chartType,
-			chartAnimation:chartAnimation,
-			chartRadius:chartRadius,
-			donutWidth:donutWidth,
 			chartEffect:chartEffect,
-			chartLabels:chartLabels,
-			labelSticks:labelSticks,
+			chartAnimation:chartAnimation,
 			explodeSegment:explodeSegment,
-			segmentBorder:segmentBorder,
-			segmentBorderInOne:segmentBorderInOne,
-			segmentBorderWidth:segmentBorderWidth,
 			palette:palette
 		}
 	
 	};
+	
+	var chartSizeAndBorders = {
+		type:"items",
+		label:"Size / Borders",
+		items: {
+			chartRadius:chartRadius,
+			donutWidth:donutWidth,	
+			segmentBorder:segmentBorder,
+			segmentBorderInOne:segmentBorderInOne,
+			segmentBorderWidth:segmentBorderWidth,			
+
+		}
+	
+	};	
+	
+	var labelsOptions = {
+		type:"items",
+		label:"Labels",
+		items: {
+			chartLabels:chartLabels,
+			showValues:showValues,
+			onlyValues:onlyValues,
+			labelTextSize:labelTextSize,
+			labelDistance:labelDistance,
+			labelSticks:labelSticks
+		}
+	
+	};	
+	
+	var Position = {
+		type:"items",
+		label:"Position",
+		items: {
+			gutterTop:gutterTop,
+			gutterLeft:gutterLeft
+		}
+	
+	};	
+	
+	
 	
 	var TextCenter = {
 		type:"items",
@@ -386,7 +503,73 @@ define( [
 		}
 	
 	};	
+
+
+	var keyPositionX = {
+			type: "integer",
+			label: "Position X",
+			ref: "keyPositionX",
+			component: "slider",
+			min: -100,
+			max: 100,
+			step: 1,
+			//expression: "always",
+			defaultValue: 0
+	};	
+	var keyPositionY = {
+			type: "integer",
+			label: "Position Y",
+			ref: "keyPositionY",
+			component: "slider",
+			min: -100,
+			max: 100,
+			step: 1,
+			//expression: "always",
+			defaultValue: 0
+	};		
+
+	var showLegends = {
+			type: "boolean",
+			component: "switch",
+			label: "Show Legends",
+			ref: "showLegends",
+			options: [{
+				value: true,
+				label: "On"
+			}, {
+				value: false,
+				label: "Off"
+			}],
+			defaultValue: false
+	};
+
+	var keyHalign = {
+			type: "string",
+			component: "switch",
+			label: "Align",
+			ref: "keyHalign",
+			options: [{
+				value: "right",
+				label: "Right"
+			}, {
+				value: "left",
+				label: "Left"
+			}],
+			defaultValue: false
+	};	
 	
+	var legends = {
+		type:"items",
+		label:"Legends",
+		items: {			
+			showLegends:showLegends,
+			keyHalign:keyHalign,
+			keyPositionX:keyPositionX,
+			keyPositionY:keyPositionY
+			
+		}
+	
+	};		
     // *****************************************************************************
     // Main property panel definition
     // ~~
@@ -406,7 +589,11 @@ define( [
 			sorting: sortingSection,
 			//Custom Sections
 			Options: Options,
-			TextCenter:TextCenter
+			chartSizeAndBorders:chartSizeAndBorders,
+			labelsOptions:labelsOptions,
+			Position:Position,
+			TextCenter:TextCenter,
+			legends:legends
 			//MyColorPicker: MyColorPicker
 			//miscSettings: miscSettings
 

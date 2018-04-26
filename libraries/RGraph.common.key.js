@@ -178,11 +178,12 @@
             * Specific location coordinates
             */
             if (typeof(prop['chart.key.position.x']) == 'number') {
-                hpos = prop['chart.key.position.x'];
+                hpos = hpos+((prop['chart.key.position.x']/100)*ca.width);
             }
             
             if (typeof(prop['chart.key.position.y']) == 'number') {
-                vpos = prop['chart.key.position.y'];
+                //vpos = vpos+prop['chart.key.position.y'];
+				vpos = vpos+((prop['chart.key.position.y']/100)*(ca.height+gutterTop+10));
             }
     
     
