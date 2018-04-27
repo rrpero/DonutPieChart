@@ -313,6 +313,23 @@ define( [
 			],
 			defaultValue: "no"
 	};
+	
+	var valueBelow = {
+			type: "boolean",
+			component: "switch",
+			label: "Value Below",
+			ref: "valueBelow",
+			options: [{
+				value: true,
+				label: "On"
+			}, {
+				value: false,
+				label: "Off"
+			}],
+			defaultValue: false
+	};	
+		
+	
 	var onlyValues = {
 			type: "boolean",
 			component: "switch",
@@ -326,7 +343,23 @@ define( [
 				label: "Off"
 			}],
 			defaultValue: false
-	};	
+	};
+
+
+	var keepColors = {
+			type: "boolean",
+			component: "switch",
+			label: "Keep Colors",
+			ref: "keepColors",
+			options: [{
+				value: true,
+				label: "On"
+			}, {
+				value: false,
+				label: "Off"
+			}],
+			defaultValue: false
+	};		
 	
 
 
@@ -445,7 +478,8 @@ define( [
 			chartEffect:chartEffect,
 			chartAnimation:chartAnimation,
 			explodeSegment:explodeSegment,
-			palette:palette
+			palette:palette,
+			keepColors:keepColors
 		}
 	
 	};
@@ -470,6 +504,7 @@ define( [
 		items: {
 			chartLabels:chartLabels,
 			showValues:showValues,
+			valueBelow:valueBelow,
 			onlyValues:onlyValues,
 			labelTextSize:labelTextSize,
 			labelDistance:labelDistance,
@@ -543,6 +578,21 @@ define( [
 			defaultValue: false
 	};
 
+	var graphGutter = {
+			type: "string",
+			component: "switch",
+			label: "Orientation",
+			ref: "graphGutter",
+			options: [{
+				value: "graph",
+				label: "Vertical"
+			}, {
+				value: "gutter",
+				label: "Horizontal"
+			}],
+			defaultValue: "graph"
+	};	
+	
 	var keyHalign = {
 			type: "string",
 			component: "switch",
@@ -563,6 +613,7 @@ define( [
 		label:"Legends",
 		items: {			
 			showLegends:showLegends,
+			graphGutter:graphGutter,
 			keyHalign:keyHalign,
 			keyPositionX:keyPositionX,
 			keyPositionY:keyPositionY

@@ -439,7 +439,34 @@
                 } else {
                     hpos = ca.width / 2;
                 }
+				
+				
             }
+            /**
+            * Specific location coordinates
+            */
+            if (typeof(prop['chart.key.position.x']) == 'number') {
+                if(obj.radius){
+					//hpos = hpos+((prop['chart.key.position.x']/100)*(obj.radius/2));
+					
+					hpos=obj.centerx +prop['chart.key.position.x']*(obj.radius/100);
+					
+				}
+				else{
+					hpos = hpos+((prop['chart.key.position.x']/100)*ca.width);
+				}
+            }
+            
+            if (typeof(prop['chart.key.position.y']) == 'number') {
+                //vpos = vpos+prop['chart.key.position.y'];
+				if(obj.radius){
+					//vpos = vpos+((prop['chart.key.position.y']/100)*((obj.radius/2)+gutterTop+10));
+					vpos=obj.centery +prop['chart.key.position.y']*(obj.radius/100);
+					//console.log(vpos);
+				}
+				else
+					vpos = vpos+((prop['chart.key.position.y']/100)*(ca.height+gutterTop+10));
+            }			
     
     
     
@@ -448,18 +475,19 @@
             /**
             * This makes the key centered
             */  
-            hpos -= (length / 2);
+            //hpos -= (length / 2);
     
     
             /**
             * Override the horizontal/vertical positioning
+			* COMMENTED TO WORK  POSITION  IN  QSENSE !!!!!!!
             */
-            if (typeof(prop['chart.key.position.x']) == 'number') {
-                hpos = prop['chart.key.position.x'];
-            }
-            if (typeof(prop['chart.key.position.y']) == 'number') {
-                vpos = prop['chart.key.position.y'];
-            }
+            //if (typeof(prop['chart.key.position.x']) == 'number') {
+            //    hpos = prop['chart.key.position.x'];
+            //}
+            //if (typeof(prop['chart.key.position.y']) == 'number') {
+            //    vpos = prop['chart.key.position.y'];
+            //}
     
     
     
