@@ -266,7 +266,7 @@ define( [
 			max: 200,
 			step: 1,			
 			//expression: "always",
-			defaultValue: 100
+			defaultValue: 75
 	};
 
 	var donutWidth = {
@@ -405,6 +405,15 @@ define( [
 			defaultValue: 5
 	};
 	
+	var borderColor = {
+			type: "string",
+			label: "Border Color",
+			ref: "borderColor",
+			component:"color-picker",
+			//expression: "always",
+			defaultValue: "#ffffff"
+	};		
+	
 	var palette = {
 			type: "string",
 			component: "dropdown",
@@ -422,6 +431,9 @@ define( [
 			},{
 				value: "greengradient",
 				label: 'Green Gradient'
+			},{
+				value: "paletteBG",
+				label: 'Beautiful Gradients'
 			},{
 				value: "yellowwhite",
 				label: 'Yellow-White'
@@ -467,7 +479,16 @@ define( [
 			max: 200,
 			step: 1,
 			//expression: "always",
-			defaultValue: 100
+			defaultValue: 90
+	};	
+	
+	var rotateUpFor = {
+			type: "string",
+			label: "Roteta Up For",
+			ref: "rotateUpFor",
+			//component:"color-picker",
+			//expression: "always",
+			defaultValue: ""
 	};	
 	
 	var Options = {
@@ -491,6 +512,7 @@ define( [
 			chartRadius:chartRadius,
 			donutWidth:donutWidth,	
 			segmentBorder:segmentBorder,
+			borderColor:borderColor,
 			segmentBorderInOne:segmentBorderInOne,
 			segmentBorderWidth:segmentBorderWidth,			
 
@@ -518,7 +540,8 @@ define( [
 		label:"Position",
 		items: {
 			gutterTop:gutterTop,
-			gutterLeft:gutterLeft
+			gutterLeft:gutterLeft,
+			rotateUpFor:rotateUpFor
 		}
 	
 	};	
@@ -614,7 +637,7 @@ define( [
 		items: {			
 			showLegends:showLegends,
 			graphGutter:graphGutter,
-			keyHalign:keyHalign,
+			//keyHalign:keyHalign,
 			keyPositionX:keyPositionX,
 			keyPositionY:keyPositionY
 			
