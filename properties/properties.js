@@ -238,9 +238,9 @@ define( [
 			label: "Text Pos X(Can be Negative)",
 			ref: "textPosX",
 			component: "slider",
-			min: -150,
-			max: 150,
-			step: 1,			
+			min: -100,
+			max: 100,
+			step: 0.1,			
 			//expression: "always",
 			defaultValue: 0
 	};	
@@ -250,9 +250,9 @@ define( [
 			label: "Text Pos Y(Can be Negative)",
 			ref: "textPosY",
 			component: "slider",
-			min: -155,
-			max: 145,
-			step: 1,			
+			min: -105,
+			max: 95,
+			step: 0.1,			
 			//expression: "always",
 			defaultValue: -5
 	};		
@@ -484,7 +484,7 @@ define( [
 	
 	var rotateUpFor = {
 			type: "string",
-			label: "Roteta Up For",
+			label: "Rotate Up For",
 			ref: "rotateUpFor",
 			//component:"color-picker",
 			//expression: "always",

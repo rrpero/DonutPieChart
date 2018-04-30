@@ -889,7 +889,10 @@
                         co.fillStyle = prop['chart.labels.colors'][i];
                     }
 
-
+					if(cy<y)
+						var angle2 = (angle*(180/Math.PI))+270;
+					else
+						var angle2 = (angle*(180/Math.PI))+90;
                     RG.text2(this, {
                           font: font,
                           size: text_size,
@@ -900,6 +903,7 @@
                         halign: hAlignment,
                            tag: 'labels',
                           bold: bold,
+						//  angle:angle2,
 						 // bounding:true,
 						 // boundingStroke:"white",
                          color: prop['chart.labels.sticks.usecolors'] ? prop['chart.colors'][i] : 'black'
