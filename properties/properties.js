@@ -234,7 +234,7 @@ define( [
 	};
 	
 		var textPosX = {
-			type: "integer",
+			type: "number",
 			label: "Text Pos X(Can be Negative)",
 			ref: "textPosX",
 			component: "slider",
@@ -246,7 +246,7 @@ define( [
 	};	
 	
 		var textPosY = {
-			type: "integer",
+			type: "number",
 			label: "Text Pos Y(Can be Negative)",
 			ref: "textPosY",
 			component: "slider",
