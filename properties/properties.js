@@ -92,6 +92,21 @@ define( [
 			}],
 			defaultValue: false
 	};	
+	/*
+	var thousandSeparator = {
+			type: "string",
+			label: "Thousand Separator",
+			ref: "thousandSeparator",
+			expression: "always",
+			defaultValue: "."
+	};
+	var decimalSeparator = {
+			type: "string",
+			label: "Decimal Separator",
+			ref: "decimalSeparator",
+			expression: "always",
+			defaultValue: ","
+	};*/	
 		
 	var chartLabels = {
 			type: "boolean",
@@ -487,7 +502,7 @@ define( [
 			label: "Rotate Up For",
 			ref: "rotateUpFor",
 			//component:"color-picker",
-			//expression: "always",
+			expression: "always",
 			defaultValue: ""
 	};	
 	
@@ -501,6 +516,8 @@ define( [
 			explodeSegment:explodeSegment,
 			palette:palette,
 			keepColors:keepColors
+			//,thousandSeparator:thousandSeparator
+			//,decimalSeparator:decimalSeparator
 		}
 	
 	};

@@ -68,7 +68,13 @@ define( [
 			if(typeof(layout.borderColor) == "undefined"){
 				layout.borderColor={};
 				layout.borderColor.color="#fff";	
-			}				
+			}
+			/*
+			if(typeof(layout.thousandSeparator) == "undefined")
+				layout.thousandSeparator=".";
+			if(typeof(layout.decimalSeparator) == "undefined")
+				layout.decimalSeparator=",";			
+			*/
 
 			//debug propose only, please comment
 			//console.log('Data returned: ', layout.qHyperCube);
@@ -105,9 +111,9 @@ define( [
 			
 			// Get the values of the dimension
 			var dimMeasArray=[];
-			var dimMeasTPArray=[];
 			var dimArray =[];
-			var measArray =[];
+			var measArrayNum =[];
+			var measArrayText =[];
 			var total= 0;
 			var palette =["RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];	
 
@@ -185,23 +191,32 @@ define( [
 
 				paletteKeep[i]=palette[layout.qHyperCube.qDataPages[0].qMatrix[i][0].qElemNumber];
 				dimArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][0].qText;
-				measArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
-				total=total+parseFloat(measArray[i].replace(",","."));
+				console.log(layout.qHyperCube.qDataPages[0].qMatrix[i][1]);
+				//measArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
+				measArrayNum[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qNum;
+				measArrayText[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText;
+				dimMeasArray[i] = dimArray[i] + valueBelow +measArrayText[i];
 				
-
-				
-				dimMeasArray[i] = dimArray[i] + valueBelow +measArray[i];
-				dimMeasTPArray[i] = dimArray[i] + " </br>- " +measArray[i];
+				total=total+parseFloat(measArrayNum[i]);				
 				
 			}
 			
 			if(layout.keepColors)
 				palette=paletteKeep;
-			//console.log(total);
 			
+			/*TODO -->await works on  here to get variable
+			
+			
+			  var obj = await app.variable.getContent('ThousandSep').then( reply => {obj=reply;});
+			*/
+			
+			
+			
+			//console.log(app.variable.getContent("ThousandSep").$$state.value);
+			//console.log(layout.thousandSeparator);
 			//% to Only Values
 			var measArrayPerc = [];
-			var measArrayValue = [];
+			//var measArrayValue = [];
 			
 			var dimMeasPercArray=[];
 			var dimMeasPercTPArray=[];			
@@ -209,14 +224,18 @@ define( [
 			var origin=-Math.PI/2;
 			var originAcc = 0;
 			for (var i=0; i<numberOfDimValues;i++){
-				var measPercArray = (parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",","."))/total)*100;
 				
-				originAcc=originAcc+(2*(Math.PI*(parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",","."))/total)));
+				//measArrayValue[i]=layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
+				//measArrayValue[i]=measArray[i];
+				
+				var measPercArray = (parseFloat(measArrayNum[i])/total)*100;
+				
+				originAcc=originAcc+(2*(Math.PI*(parseFloat(measArrayNum[i])/total)));
 				if(dimArray[i]==layout.rotateUpFor){
 					origin = 
 					-1.57
 					-(originAcc
-					-(Math.PI*(parseFloat(layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",","."))/total))
+					-(Math.PI*(parseFloat(measArrayNum[i])/total))
 					//*(i+1)
 					);
 				}
@@ -227,12 +246,12 @@ define( [
 				
 				
 				measArrayPerc[i]=measPercArray + "%";
-				measArrayValue[i]=layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
+				//measArrayValue[i]=measTransformed;
 				
 				
 				dimMeasPercArray[i] = dimArray[i] +valueBelow +measPercArray + "%";
 				dimMeasPercTPArray[i] = dimensionName+'</br>' +
-										'<div style="color:' + palette[i]+';">' + dimArray[i]+": " +measArray[i]+"</div>" +
+										'<div style="color:' + palette[i]+';">' + dimArray[i]+": " +measArrayText[i]+"</div>" +
 										"Percentual: " + measPercArray + "%";
 				
 				
@@ -317,8 +336,7 @@ define( [
 				if(layout.showValues=="value"||layout.showValues=="percent"){
 					var labelsArray = dimMeasArray;
 					if(layout.onlyValues)
-						labelsArray=measArrayValue;
-					//var labelDimMeasArray =dimMeasTPArray;		
+						labelsArray=measArrayText;		
 					if(layout.showValues=="percent"){
 						var labelsArray = dimMeasPercArray;
 						if(layout.onlyValues)
@@ -420,7 +438,7 @@ define( [
 				case "Default":
 					chart = new RGraph.Pie({
 						id: tmpCVSID,
-						data: measArray,
+						data: measArrayNum,
 						options: {
 							origin:origin,
 							gutterLeft: layout.gutterLeft,
@@ -432,13 +450,11 @@ define( [
 							textColor: '#aaa',
 							halign: 'center',
 							strokestyle: segmentBorder2,
-							//tooltips: layout.showValues ? dimMeasTPArray : dimArray,
 							tooltips: labelDimMeasArray,
 							tooltipsEvent: 'onmousemove',
 							/*Nao  funciona  ainda
 							tooltipsOverride: tooltip_override,
-							*/							
-							//labels: layout.showValues ? labelDimMeasArray : labelsArray,	
+							*/								
 							labels: labelsArray,
 							key:layout.showLegends ? dimArray: null,
 							keyHalign:layout.keyHalign,
@@ -491,7 +507,7 @@ define( [
 					case "Halo":
 					chart = new RGraph.Pie({
 						id: tmpCVSID,
-						data: measArray,
+						data: measArrayNum,
 						options: {
 							origin:origin,
 							gutterLeft: layout.gutterLeft,
@@ -502,10 +518,8 @@ define( [
 							textSize: labelTextSize,
 							textColor: '#9fcfff',
 							strokestyle: segmentBorder2,
-							//tooltips: layout.showValues ? dimMeasTPArray : dimArray,
 							tooltips: labelDimMeasArray,
-							tooltipsEvent: 'onmousemove',					
-							//labels: layout.showValues ? labelDimMeasArray : labelsArray,					
+							tooltipsEvent: 'onmousemove',										
 							labels: labelsArray,
 							key:layout.showLegends ? dimArray: null,
 							keyHalign:layout.keyHalign,
