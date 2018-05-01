@@ -191,7 +191,7 @@ define( [
 
 				paletteKeep[i]=palette[layout.qHyperCube.qDataPages[0].qMatrix[i][0].qElemNumber];
 				dimArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][0].qText;
-				console.log(layout.qHyperCube.qDataPages[0].qMatrix[i][1]);
+				//console.log(layout.qHyperCube.qDataPages[0].qMatrix[i][1]);
 				//measArray[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText.replace(",",".");
 				measArrayNum[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qNum;
 				measArrayText[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText;
@@ -702,7 +702,7 @@ define( [
 			// On Mouse Over actions
 			function onMouseMove (e, shape)
 			{
-				console.log("aaa");
+				//console.log("aaa");
 				var index = shape.index;
 				//self.backendApi.selectValues(0, dimArray[index], true);
 				//if(index==1)
