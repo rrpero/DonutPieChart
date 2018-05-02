@@ -9,6 +9,59 @@ define( [
 ], function ($, qlik, $q, $http) {
     'use strict';
 	//Define the current application
+	var messages = {
+		en_US: {
+			CHART_TYPE: 'Chart Tyoe'
+		},
+		pt_BR: {
+			CHART_EFFECT:"Efeito de Gráfico",
+			_2D:"2D",
+			HALO:"Halo",
+			ANIMATION:"Animação",
+			ON:"Ligado",
+			OFF:"Desligado",
+			SHOW_LABELS:"Mostrar Labels",
+			LABEL_TEXT_SIZE:"Tamanho do Texto",
+			LABEL_DISTANCE:"Afastamento da Label",
+			SHOW_LABEL_STICKS:"Linha de Label",
+			EXPLODE_SEGMENT:"Explodir Seguimento",
+			NONE:"Nenhum",
+			SHOW_SEGMENT_BORDER:"Mostrar Bordas",
+			BORDER_ONE_DIMENSION:"Borda Somente em 1",
+			NO:"Não",
+			FIRST_DIMENSION_VALUE:"Primeiro",
+			SECOND_DIMENSION_VALUE:"Segundo",
+			TEXT_MIDDLE:"Texto no meio(digite \\n para pular linha",
+			TEXT_SIZE:"Tamanho do Texto",
+			TEXT_POS_HOR:"Posição Horizontal do Texto",
+			TEXT_POS_VER:"Posição Vertical do Texto",
+			CHART_RADIUS_SIZE:"Tamanho do Gráfico",
+			DONUT_WIDTH_SIZE:"Espessura",
+			TEXT_COLOR:"Cor do Texto",
+			SHOW_VALUES:"Mostrar Valores",
+			VALUES:"Valores",
+			PERCENT:"Porcentagem",
+			VALUES_BELOW:"Valores embaixo",
+			YES:"Sim",
+			ONLY_VALUES:"Mostra Somente Valores",
+			KEEP_COLORS:"Manter Cores",
+			SEGMENT_BORDER_WIDTH:"Tamanho da Borda",
+			BORDER_COLOR:"Cor da Borda",
+			COLORS:"Cores",
+			BLUE_GRADIENTS:"Tons Azul",
+			RED_GRADIENTS:"Tons Vermelho",
+			GREEN_GRADIENTS:"Tons Verde",
+			GRADIENTS:"Gradientes",
+			YELLOW_TRANSPARENCE:"Amarelo Primeira e Resto Transparente",
+			TRANSPARENCE_YELLOW:"Transparente Primeira e Resto Amarelo",	
+			BLUE_TRANSPARENCE:"Azul Primeira e Resto Transparente",
+			TRANSPARENCE_BLUE:"Transparente Primeira e Resto Azul",	
+			RED_TRANSPARENCE:"Vermelho Primeira e Resto Transparente",
+			TRANSPARENCE_RED:"Transparente Primeira e Resto Vermelho",	
+			STANDARD_QS	:"Padrão QS"			
+		}
+	};
+	var language="pt_BR";
 	var app = qlik.currApp();
 
     // *****************************************************************************
@@ -43,12 +96,14 @@ define( [
 	// *****************************************************************************
     // Options Section
     // *****************************************************************************
-
+	
 
 	var chartType = {
 			type: "string",
 			component: "dropdown",
-			label: "Chart Type",
+			label: messages[language].CHART_TYPE,
+			
+			//label:app.GetLocaleInfo().qReturn.qCollation,
 			ref: "chartType",
 			options: [{
 				value: "pie",
@@ -60,35 +115,36 @@ define( [
 			],
 			defaultValue: "donut"
 	};
-
 	
+
 	var chartEffect = {
 			type: "string",
 			component: "dropdown",
-			label: "Chart Effect",
+			label: messages[language].CHART_EFFECT,
 			ref: "chartEffect",
 			options: [{
 				value: "2d",
-				label: "2D"
+				label: messages[language]._2D
 			}, {
 				value: "Halo",
-				label: "Halo"
+				label: messages[language].HALO
 			}
 			],
 			defaultValue: "2d"
 	};
+
 	
 	var chartAnimation = {
 			type: "boolean",
 			component: "switch",
-			label: "Animation",
+			label: messages[language].ANIMATION,
 			ref: "animation",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: false
 	};	
@@ -107,25 +163,27 @@ define( [
 			expression: "always",
 			defaultValue: ","
 	};*/	
-		
+
+
+	
 	var chartLabels = {
 			type: "boolean",
 			component: "switch",
-			label: "Show Chart Labels",
+			label: messages[language].SHOW_LABELS,
 			ref: "chartLabels",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: true
 	};
-	
+
 		var labelTextSize = {
 			type: "integer",
-			label: "Label Text % Size",
+			label: messages[language].LABEL_TEXT_SIZE,
 			ref: "labelTextSize",
 			component: "slider",
 			min: 10,
@@ -134,10 +192,10 @@ define( [
 			//expression: "always",
 			defaultValue: 100
 	};	
-	
+
 		var labelDistance = {
 			type: "integer",
-			label: "Label Distance",
+			label: messages[language].LABEL_DISTANCE,
 			ref: "labelDistance",
 			component: "slider",
 			min: -100,
@@ -146,30 +204,32 @@ define( [
 			//expression: "always",
 			defaultValue: 10
 	};		
-	
+
 	var labelSticks = {
 			type: "boolean",
 			component: "switch",
-			label: "Show Labels Sticks",
+			label: messages[language].SHOW_LABEL_STICKS,
 			ref: "labelSticks",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: false
 	};
+
+
 	
 	var explodeSegment = {
 			type: "string",
 			component: "dropdown",
-			label: "Explode Segment",
+			label: messages[language].EXPLODE_SEGMENT,
 			ref: "explodeSegment",
 			options: [{
 				value: 0,
-				label: "None"
+				label:messages[language].NONE
 			}, {
 				value: 1,
 				label: 1
@@ -191,46 +251,47 @@ define( [
 	};
 	
 	
-	
-	
 	var segmentBorder = {
 			type: "boolean",
 			component: "switch",
-			label: "Show Segment Border",
+			label: messages[language].SHOW_SEGMENT_BORDER,
 			ref: "segmentBorder",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: false
 	};
 	
+
+	
 	var segmentBorderInOne = {
 			type: "string",
 			component: "dropdown",
-			label: "Border One Dimension",
+			label: messages[language].BORDER_ONE_DIMENSION,
 			ref: "segmentBorderInOne",
 			options: [{
 				value: "no",
-				label: 'No'
+				label: messages[language].NO
 			},{
 				value: "1",
-				label: 'First Dimension Value'
+				label: messages[language].FIRST_DIMENSION_VALUE
 			}, {
 				value: "2",
-				label: 'Second Dimension Value'
+				label: messages[language].SECOND_DIMENSION_VALUE
 			}
 			
 			],
 			defaultValue: "no"
 	};	
+
 	
 	var textMiddle = {
 			type: "string",
-			label: "Text Center(type \\n to  break  line)",
+			label: messages[language].TEXT_MIDDLE,
 			ref: "textMiddle",
 			expression: "always",
 			defaultValue: ""
@@ -238,7 +299,7 @@ define( [
 
 		var sizeText = {
 			type: "integer",
-			label: "Text % Size",
+			label: messages[language].TEXT_SIZE,
 			ref: "sizeText",
 			component: "slider",
 			min: 10,
@@ -247,10 +308,11 @@ define( [
 			//expression: "always",
 			defaultValue: 100
 	};
+
 	
 		var textPosX = {
 			type: "number",
-			label: "Text Pos X(Can be Negative)",
+			label: messages[language].TEXT_POS_HOR,
 			ref: "textPosX",
 			component: "slider",
 			min: -100,
@@ -262,7 +324,7 @@ define( [
 	
 		var textPosY = {
 			type: "number",
-			label: "Text Pos Y(Can be Negative)",
+			label: messages[language].TEXT_POS_VER,
 			ref: "textPosY",
 			component: "slider",
 			min: -105,
@@ -272,9 +334,10 @@ define( [
 			defaultValue: -5
 	};		
 
+	
 	var chartRadius = {
 			type: "integer",
-			label: "Chart Radius % Size",
+			label: messages[language].CHART_RADIUS_SIZE,
 			ref: "chartRadius",
 			component: "slider",
 			min: 10,
@@ -284,9 +347,11 @@ define( [
 			defaultValue: 75
 	};
 
+
+	
 	var donutWidth = {
 			type: "integer",
-			label: "Donut Width % Size",
+			label: messages[language].DONUT_WIDTH_SIZE,
 			ref: "donutWidth",
 			component: "slider",
 			min: 10,
@@ -300,7 +365,7 @@ define( [
 	
 	var colorText = {
 			type: "string",
-			label: "Text Color",
+			label: messages[language].TEXT_COLOR,
 			ref: "colorText",
 			component:"color-picker",
 			//expression: "always",
@@ -308,70 +373,74 @@ define( [
 	};	
 	
 	
-	
 	var showValues = {
 			type: "string",
 			component: "dropdown",
-			label: "Show Values",
+			label: messages[language].SHOW_VALUES,
 			ref: "showValues",
 			options: [{
 				value: "value",
-				label: 'Values'
+				label: messages[language].VALUES
 			},{
 				value: "percent",
-				label: 'Percent'
+				label: messages[language].PERCENT
 			}, {
 				value: "no",
-				label: 'No'
+				label: messages[language].NO
 			}
 			
 			],
 			defaultValue: "no"
 	};
 	
+
+	
 	var valueBelow = {
 			type: "boolean",
 			component: "switch",
-			label: "Value Below",
+			label: messages[language].VALUES_BELOW,
 			ref: "valueBelow",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].YES
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].NO
 			}],
 			defaultValue: false
 	};	
 		
-	
+
+		
 	var onlyValues = {
 			type: "boolean",
 			component: "switch",
-			label: "Only Values",
+			label: messages[language].ONLY_VALUES,
 			ref: "onlyValues",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: false
 	};
 
 
+	
+	
 	var keepColors = {
 			type: "boolean",
 			component: "switch",
-			label: "Keep Colors",
+			label: messages[language].KEEP_COLORS,
 			ref: "keepColors",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].ON
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].OFF
 			}],
 			defaultValue: false
 	};		
@@ -382,7 +451,7 @@ define( [
 	var segmentBorderWidth = {
 			type: "string",
 			component: "dropdown",
-			label: "Segment Border Width",
+			label: messages[language].SEGMENT_BORDER_WIDTH,
 			ref: "segmentBorderWidth",
 			options: [{
 				value: 1,
@@ -420,9 +489,11 @@ define( [
 			defaultValue: 5
 	};
 	
+
+	
 	var borderColor = {
 			type: "string",
-			label: "Border Color",
+			label: messages[language].BORDER_COLOR,
 			ref: "borderColor",
 			component:"color-picker",
 			//expression: "always",
@@ -432,41 +503,41 @@ define( [
 	var palette = {
 			type: "string",
 			component: "dropdown",
-			label: "Colors",
+			label: messages[language].COLORS,
 			ref: "palette",
 			options: [{
 				value: "default",
-				label: 'Standard QS'
+				label: messages[language].STANDARD_QS
 			},{
 				value: "bluegradient",
-				label: 'Blue Gradient'
+				label: messages[language].BLUE_GRADIENTS
 			},{
 				value: "redgradient",
-				label: 'Red Gradient'
+				label: messages[language].RED_GRADIENTS
 			},{
 				value: "greengradient",
-				label: 'Green Gradient'
+				label: messages[language].GREEN_GRADIENTS
 			},{
 				value: "paletteBG",
-				label: 'Beautiful Gradients'
+				label: messages[language].GRADIENTS
 			},{
 				value: "yellowwhite",
-				label: 'Yellow-White'
+				label: messages[language].YELLOW_TRANSPARENCE
 			},{
 				value: "whiteyellow",
-				label: 'White-Yellow'
+				label: messages[language].TRANSPARENCE_YELLOW
 			},{
 				value: "bluewhite",
-				label: 'Blue-White'
+				label: messages[language].BLUE_TRANSPARENCE
 			},{
 				value: "whiteblue",
-				label: 'White-Blue'
+				label: messages[language].TRANSPARENCE_BLUE
 			},{
 				value: "redwhite",
-				label: 'Red-White'
+				label: messages[language].RED_TRANSPARENCE
 			},{
 				value: "whitered",
-				label: 'White-Red'
+				label: messages[language].TRANSPARENCE_RED
 			}
 			
 			],
