@@ -506,63 +506,7 @@ define( [
 			defaultValue: ""
 	};	
 	
-	var Options = {
-		type:"items",
-		label:"Options",
-		items: {			
-			chartType:chartType,
-			chartEffect:chartEffect,
-			chartAnimation:chartAnimation,
-			explodeSegment:explodeSegment,
-			palette:palette,
-			keepColors:keepColors
-			//,thousandSeparator:thousandSeparator
-			//,decimalSeparator:decimalSeparator
-		}
-	
-	};
-	
-	var chartSizeAndBorders = {
-		type:"items",
-		label:"Size / Borders",
-		items: {
-			chartRadius:chartRadius,
-			donutWidth:donutWidth,	
-			segmentBorder:segmentBorder,
-			borderColor:borderColor,
-			segmentBorderInOne:segmentBorderInOne,
-			segmentBorderWidth:segmentBorderWidth,			
 
-		}
-	
-	};	
-	
-	var labelsOptions = {
-		type:"items",
-		label:"Labels",
-		items: {
-			chartLabels:chartLabels,
-			showValues:showValues,
-			valueBelow:valueBelow,
-			onlyValues:onlyValues,
-			labelTextSize:labelTextSize,
-			labelDistance:labelDistance,
-			labelSticks:labelSticks
-		}
-	
-	};	
-	
-	var Position = {
-		type:"items",
-		label:"Position",
-		items: {
-			gutterTop:gutterTop,
-			gutterLeft:gutterLeft,
-			rotateUpFor:rotateUpFor
-		}
-	
-	};	
-	
 	
 	
 	var TextCenter = {
@@ -647,9 +591,11 @@ define( [
 			}],
 			defaultValue: false
 	};	
+
 	
 	var legends = {
 		type:"items",
+		//component: "accordion",
 		label:"Legends",
 		items: {			
 			showLegends:showLegends,
@@ -660,7 +606,104 @@ define( [
 			
 		}
 	
+	};	
+	
+		var labelsOptions = {
+		type:"items",
+		//component: "expandable-items",
+		label:"Labels",
+		items: {
+			chartLabels:chartLabels,
+			showValues:showValues,
+			valueBelow:valueBelow,
+			onlyValues:onlyValues,
+			labelTextSize:labelTextSize,
+			labelDistance:labelDistance,
+			labelSticks:labelSticks
+		}
+	
+	};	
+	
+	var Position = {
+		type:"items",
+		//component: "expandable-items",
+		label:"Position",
+		items: {
+			gutterTop:gutterTop,
+			gutterLeft:gutterLeft,
+			rotateUpFor:rotateUpFor
+		}
+	
+	};	
+
+	var legPosLab = {
+		//type:"items",
+		component: "expandable-items",
+		label:"Legend, Labels and Position",
+		items: {			
+			legends:legends,
+			labelsOptions:labelsOptions,
+			Position:Position
+			
+		}
+	
+	};	
+	
+	
+	
+	var Options = {
+		type:"items",
+		label:"Options",
+		items: {			
+			chartType:chartType,
+			chartEffect:chartEffect,
+			chartAnimation:chartAnimation,
+			explodeSegment:explodeSegment,
+			palette:palette,
+			keepColors:keepColors
+			//,thousandSeparator:thousandSeparator
+			//,decimalSeparator:decimalSeparator
+		}
+	
+	};
+	
+	var chartSize = {
+		type:"items",
+		label:"Size",
+		items: {
+			chartRadius:chartRadius,
+			donutWidth:donutWidth		
+
+		}
+	
+	};
+
+	var chartBorders = {
+		type:"items",
+		label:"Borders",
+		items: {
+			segmentBorder:segmentBorder,
+			borderColor:borderColor,
+			segmentBorderInOne:segmentBorderInOne,
+			segmentBorderWidth:segmentBorderWidth,			
+
+		}
+	
+	};	
+	
+	var optionsSizeBorders = {
+		//type:"items",
+		component: "expandable-items",
+		label:"Options, Size and Border",
+		items: {			
+			Options:Options,
+			chartSize:chartSize,
+			chartBorders:chartBorders
+			
+		}
+	
 	};		
+	
     // *****************************************************************************
     // Main property panel definition
     // ~~
@@ -679,12 +722,14 @@ define( [
             appearance: appearanceSection,
 			sorting: sortingSection,
 			//Custom Sections
-			Options: Options,
-			chartSizeAndBorders:chartSizeAndBorders,
-			labelsOptions:labelsOptions,
-			Position:Position,
-			TextCenter:TextCenter,
-			legends:legends
+			optionsSizeBorders:optionsSizeBorders,
+			legPosLab:legPosLab,
+			//labelsOptions:labelsOptions,
+			
+			//Position:Position,
+			//legends:legends,
+			TextCenter:TextCenter
+
 			//MyColorPicker: MyColorPicker
 			//miscSettings: miscSettings
 

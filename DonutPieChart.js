@@ -197,7 +197,8 @@ define( [
 				measArrayText[i] = layout.qHyperCube.qDataPages[0].qMatrix[i][1].qText;
 				dimMeasArray[i] = dimArray[i] + valueBelow +measArrayText[i];
 				
-				total=total+parseFloat(measArrayNum[i]);				
+				total=total+parseFloat(measArrayNum[i]);	
+				//console.log(dimArray[i]+"-"+measArrayNum[i]);
 				
 			}
 			
