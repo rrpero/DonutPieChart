@@ -12,46 +12,46 @@
 		- Cores
 		- Manter Cores
 
-### Tamanho
+	- Tamanho
 
-#### Tamanho do Gráfico
-#### Espessura
+		- Tamanho do Gráfico
+		- Espessura
 
-### Borda
+	- Borda
 
-#### Mostrar Bordas
-#### Cor da Borda
-#### Borda Somente em 1
-#### Tamanho da Borda
+		- Mostrar Bordas
+		- Cor da Borda
+		- Borda Somente em 1
+		- Tamanho da Borda
 
-## Legenda, Labels e Posição
+2. Legenda, Labels e Posição
 
-### Legenda
+	- Legenda
 
-#### Mostrar Legendas
-#### Orentação
-#### Posição Horizontal
-#### Posição Vertical
+		- Mostrar Legendas
+		- Orentação
+		- Posição Horizontal
+		- Posição Vertical
 
-### Labels
+	- Labels
 
-#### Mostrar Labels
-#### Mostrar Valores
-#### Valores Embaixo 
-#### Mostrar Somente Valores
-#### Tamanho do Texto
-#### Afastamento da Label
-#### Linha de Label
+		- Mostrar Labels
+		- Mostrar Valores
+		- Valores Embaixo 
+		- Mostrar Somente Valores
+		- Tamanho do Texto
+		- Afastamento da Label
+		- Linha de Label
 
-### Posição
+	- Posição
 
-#### Posição Vertical
-#### Posição Horizontal
-#### Rotacionar Para Cima na Dimensão
+		- Posição Vertical
+		- Posição Horizontal
+		- Rotacionar Para Cima na Dimensão
 
-## Texto no Meio
+3. Texto no Meio
 
-### Texto no Meio(\n Para pular linha)
-### Tamanho do Texto
-### Posição Horizontal do Texto
-### Cor do Texto
+		- Texto no Meio(\n Para pular linha)
+		- Tamanho do Texto
+		- Posição Horizontal do Texto
+		- Cor do Texto
