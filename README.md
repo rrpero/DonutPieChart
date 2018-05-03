@@ -56,4 +56,5 @@
 		- Texto no Meio(\n Para pular linha)
 		- Tamanho do Texto
 		- Posição Horizontal do Texto
+		- Posição Vertical do Texto
 		- Cor do Texto
