@@ -1,16 +1,16 @@
 # Donut/Pie Chart With Options to customize based on RGraph library
 
 
-## Opções, Tamanho e Borda
+1. Opções, Tamanho e Borda
 
-### Opções
+	- Opções
 
-#### Tipo de Gráfico
-#### Efeito de Gráfico
-#### Animação
-#### Explodir Segmento
-#### Cores
-#### Manter Cores
+		- Tipo de Gráfico
+		- Efeito de Gráfico
+		- Animação
+		- Explodir Segmento
+		- Cores
+		- Manter Cores
 
 ### Tamanho
 
