@@ -11,9 +11,78 @@ define( [
 	//Define the current application
 	var messages = {
 		en_US: {
-			CHART_TYPE: 'Chart Tyoe'
+			CHART_TYPE: 'Chart Tyoe',
+			CHART_EFFECT:"Chart Effect",
+			_2D:"2D",
+			HALO:"Halo",
+			ANIMATION:"Animation",
+			ON:"On",
+			OFF:"Off",
+			SHOW_LABELS:"Show Labels",
+			LABEL_TEXT_SIZE:"Label Text Size",
+			LABEL_DISTANCE:"Label Distance",
+			SHOW_LABEL_STICKS:"Label Sticks",
+			EXPLODE_SEGMENT:"Explode Segment",
+			NONE:"None",
+			SHOW_SEGMENT_BORDER:"Show Segment Border",
+			BORDER_ONE_DIMENSION:"Border in one Dimension",
+			NO:"No",
+			FIRST_DIMENSION_VALUE:"First",
+			SECOND_DIMENSION_VALUE:"Second",
+			TEXT_MIDDLE:"Text middle(\\n to break line)",
+			TEXT_SIZE:"Text Size",
+			TEXT_POS_HOR:"Text Horizontal Position",
+			TEXT_POS_VER:"Text Vertical Position",
+			CHART_RADIUS_SIZE:"Chart Radius Size",
+			DONUT_WIDTH_SIZE:"Donut Width",
+			TEXT_COLOR:"Text Color",
+			SHOW_VALUES:"Show Values",
+			VALUES:"Values",
+			PERCENT:"Percent",
+			VALUES_BELOW:"Values Below",
+			YES:"Yes",
+			ONLY_VALUES:"Only Values",
+			KEEP_COLORS:"Keep Colors",
+			SEGMENT_BORDER_WIDTH:"Border Width",
+			BORDER_COLOR:"Border Color",
+			COLORS:"Colors",
+			BLUE_GRADIENTS:"Blue Gradient",
+			RED_GRADIENTS:"Red Gradient",
+			GREEN_GRADIENTS:"Green Gradient",
+			GRADIENTS:"Gradients",
+			YELLOW_TRANSPARENCE:"Yellow First All Invisible",
+			TRANSPARENCE_YELLOW:"Invisible First Second Yellow",	
+			BLUE_TRANSPARENCE:"Blue First All Invisible",
+			TRANSPARENCE_BLUE:"Invisible First Second Blue",	
+			RED_TRANSPARENCE:"Red First All Invisible",
+			TRANSPARENCE_RED:"Invisible First Second Red",	
+			STANDARD_QS	:"Standard QS",
+
+			PIE:"Pie",
+			DONUT:"Donut",
+			CHART_POSITION_HORIZONTAL:"Horizontal",
+			CHART_POSITION_VERTICAL:"Vertical",
+			ROTATE_UP_FOR:"Rotate Up For",
+			ITEM_TEXT_MIDDLE:"Text Middle",
+			LEGEND_POSITION_HORIZONTAL:"Horizontal",
+			LEGEND_POSITION_VERTICAL:"Vertical",
+			SHOW_LEGENDS:"Show Legends",
+			SHOW:"Show",
+			DONT_SHOW:"Dont Show",
+			ORIENTATION:"Orientation",
+			VERTICAL:"Vertical",
+			HORIZONTAL:"Horizontal",
+			ITEM_LEGENDS:"Legends",
+			ITEM_LABELS:"Labels",
+			ITEM_POSITION:"Position",
+			EXPANDABLE_ITEM_LEGEND_LABEL_POSITION:"Legends, Labels and Position",
+			ITEM_OPTIONS:"Options",
+			ITEM_SIZE:"Size",
+			ITEM_BORDERS:"Border",	
+			EXPANDABLE_ITEM_OPTIONS_SIZE_BORDER:"Options, Size and Border"				
 		},
 		pt_BR: {
+			CHART_TYPE: "Tipo de Gráfico",
 			CHART_EFFECT:"Efeito de Gráfico",
 			_2D:"2D",
 			HALO:"Halo",
@@ -31,7 +100,7 @@ define( [
 			NO:"Não",
 			FIRST_DIMENSION_VALUE:"Primeiro",
 			SECOND_DIMENSION_VALUE:"Segundo",
-			TEXT_MIDDLE:"Texto no meio(digite \\n para pular linha",
+			TEXT_MIDDLE:"Texto no meio(\\n para pular linha)",
 			TEXT_SIZE:"Tamanho do Texto",
 			TEXT_POS_HOR:"Posição Horizontal do Texto",
 			TEXT_POS_VER:"Posição Vertical do Texto",
@@ -53,15 +122,39 @@ define( [
 			GREEN_GRADIENTS:"Tons Verde",
 			GRADIENTS:"Gradientes",
 			YELLOW_TRANSPARENCE:"Amarelo Primeira e Resto Transparente",
-			TRANSPARENCE_YELLOW:"Transparente Primeira e Resto Amarelo",	
+			TRANSPARENCE_YELLOW:"Transparente Primeira e Segunda Amarelo",	
 			BLUE_TRANSPARENCE:"Azul Primeira e Resto Transparente",
-			TRANSPARENCE_BLUE:"Transparente Primeira e Resto Azul",	
+			TRANSPARENCE_BLUE:"Transparente Primeira e Segunda Azul",	
 			RED_TRANSPARENCE:"Vermelho Primeira e Resto Transparente",
-			TRANSPARENCE_RED:"Transparente Primeira e Resto Vermelho",	
-			STANDARD_QS	:"Padrão QS"			
+			TRANSPARENCE_RED:"Transparente Primeira e Segunda Vermelho",	
+			STANDARD_QS	:"Padrão QS",
+
+			PIE:"Pizza",
+			DONUT:"Rosca",
+			CHART_POSITION_HORIZONTAL:"Posição Horizontal",
+			CHART_POSITION_VERTICAL:"Posição Vertical",
+			ROTATE_UP_FOR:"Rotacionar Para Cima na Dimensão",
+			ITEM_TEXT_MIDDLE:"Texto no meio",
+			LEGEND_POSITION_HORIZONTAL:"Posição Horizontal",
+			LEGEND_POSITION_VERTICAL:"Posição Vertical",
+			SHOW_LEGENDS:"Mostrar Legenda",
+			SHOW:"Mostrar",
+			DONT_SHOW:"Não Mostrar",
+			ORIENTATION:"Orientação",
+			VERTICAL:"Vertical",
+			HORIZONTAL:"Horizontal",
+			ITEM_LEGENDS:"Legenda",
+			ITEM_LABELS:"Labels",
+			ITEM_POSITION:"Posição",
+			EXPANDABLE_ITEM_LEGEND_LABEL_POSITION:"Legenda, Labels e Posição",
+			ITEM_OPTIONS:"Opções",
+			ITEM_SIZE:"Tamanho",
+			ITEM_BORDERS:"Borda",	
+			EXPANDABLE_ITEM_OPTIONS_SIZE_BORDER:"Opções, Tamanho e Borda"			
 		}
 	};
 	var language="pt_BR";
+	//var language="en_US";
 	var app = qlik.currApp();
 
     // *****************************************************************************
@@ -107,10 +200,10 @@ define( [
 			ref: "chartType",
 			options: [{
 				value: "pie",
-				label: "Pie"
+				label: messages[language].PIE
 			}, {
 				value: "donut",
-				label: "Donut"
+				label: messages[language].DONUT
 			}
 			],
 			defaultValue: "donut"
@@ -543,10 +636,13 @@ define( [
 			],
 			defaultValue: "default"
 	};	
+
+
+
 	
 	var gutterTop = {
 			type: "integer",
-			label: "Top",
+			label: messages[language].CHART_POSITION_VERTICAL,
 			ref: "gutterTop",
 			component: "slider",
 			min: -20,
@@ -558,7 +654,7 @@ define( [
 	
 	var gutterLeft = {
 			type: "integer",
-			label: "Left",
+			label: messages[language].CHART_POSITION_HORIZONTAL,
 			ref: "gutterLeft",
 			component: "slider",
 			min: -20,
@@ -568,9 +664,10 @@ define( [
 			defaultValue: 90
 	};	
 	
+	
 	var rotateUpFor = {
 			type: "string",
-			label: "Rotate Up For",
+			label: messages[language].ROTATE_UP_FOR,
 			ref: "rotateUpFor",
 			//component:"color-picker",
 			expression: "always",
@@ -579,10 +676,9 @@ define( [
 	
 
 	
-	
 	var TextCenter = {
 		type:"items",
-		label:"Text Center",
+		label:messages[language].ITEM_TEXT_MIDDLE,
 		items: {			
 			textMiddle:textMiddle,
 			sizeText:sizeText,
@@ -595,9 +691,10 @@ define( [
 	};	
 
 
+	
 	var keyPositionX = {
 			type: "integer",
-			label: "Position X",
+			label: messages[language].LEGEND_POSITION_HORIZONTAL,
 			ref: "keyPositionX",
 			component: "slider",
 			min: -300,
@@ -608,7 +705,7 @@ define( [
 	};	
 	var keyPositionY = {
 			type: "integer",
-			label: "Position Y",
+			label: messages[language].LEGEND_POSITION_VERTICAL,
 			ref: "keyPositionY",
 			component: "slider",
 			min: -300,
@@ -618,17 +715,20 @@ define( [
 			defaultValue: 3
 	};		
 
+
+	
+	
 	var showLegends = {
 			type: "boolean",
 			component: "switch",
-			label: "Show Legends",
+			label: messages[language].SHOW_LEGENDS,
 			ref: "showLegends",
 			options: [{
 				value: true,
-				label: "On"
+				label: messages[language].SHOW
 			}, {
 				value: false,
-				label: "Off"
+				label: messages[language].DONT_SHOW
 			}],
 			defaultValue: false
 	};
@@ -636,42 +736,28 @@ define( [
 	var graphGutter = {
 			type: "string",
 			component: "switch",
-			label: "Orientation",
+			label: messages[language].ORIENTATION,
 			ref: "graphGutter",
 			options: [{
 				value: "graph",
-				label: "Vertical"
+				label: messages[language].VERTICAL
 			}, {
 				value: "gutter",
-				label: "Horizontal"
+				label: messages[language].HORIZONTAL
 			}],
 			defaultValue: "graph"
 	};	
 	
-	var keyHalign = {
-			type: "string",
-			component: "switch",
-			label: "Align",
-			ref: "keyHalign",
-			options: [{
-				value: "left",
-				label: "Left"
-			},{
-				value: "right",
-				label: "Right"
-			}],
-			defaultValue: false
-	};	
+
 
 	
 	var legends = {
 		type:"items",
 		//component: "accordion",
-		label:"Legends",
+		label:messages[language].ITEM_LEGENDS,
 		items: {			
 			showLegends:showLegends,
 			graphGutter:graphGutter,
-			//keyHalign:keyHalign,
 			keyPositionX:keyPositionX,
 			keyPositionY:keyPositionY
 			
@@ -679,10 +765,12 @@ define( [
 	
 	};	
 	
+
+	
 		var labelsOptions = {
 		type:"items",
 		//component: "expandable-items",
-		label:"Labels",
+		label:messages[language].ITEM_LABELS,
 		items: {
 			chartLabels:chartLabels,
 			showValues:showValues,
@@ -695,10 +783,12 @@ define( [
 	
 	};	
 	
+
+	
 	var Position = {
 		type:"items",
 		//component: "expandable-items",
-		label:"Position",
+		label:messages[language].ITEM_POSITION,
 		items: {
 			gutterTop:gutterTop,
 			gutterLeft:gutterLeft,
@@ -710,7 +800,7 @@ define( [
 	var legPosLab = {
 		//type:"items",
 		component: "expandable-items",
-		label:"Legend, Labels and Position",
+		label:messages[language].EXPANDABLE_ITEM_LEGEND_LABEL_POSITION,
 		items: {			
 			legends:legends,
 			labelsOptions:labelsOptions,
@@ -724,7 +814,7 @@ define( [
 	
 	var Options = {
 		type:"items",
-		label:"Options",
+		label:messages[language].ITEM_OPTIONS,
 		items: {			
 			chartType:chartType,
 			chartEffect:chartEffect,
@@ -737,10 +827,12 @@ define( [
 		}
 	
 	};
+
+
 	
 	var chartSize = {
 		type:"items",
-		label:"Size",
+		label:messages[language].ITEM_SIZE,
 		items: {
 			chartRadius:chartRadius,
 			donutWidth:donutWidth		
@@ -749,9 +841,11 @@ define( [
 	
 	};
 
+
+	
 	var chartBorders = {
 		type:"items",
-		label:"Borders",
+		label:messages[language].ITEM_BORDERS,
 		items: {
 			segmentBorder:segmentBorder,
 			borderColor:borderColor,
@@ -765,7 +859,7 @@ define( [
 	var optionsSizeBorders = {
 		//type:"items",
 		component: "expandable-items",
-		label:"Options, Size and Border",
+		label:messages[language].EXPANDABLE_ITEM_OPTIONS_SIZE_BORDER,
 		items: {			
 			Options:Options,
 			chartSize:chartSize,
