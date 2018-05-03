@@ -51,6 +51,8 @@
 
 3. Texto no Meio
 
+	- Texto no Meio
+	
 		- Texto no Meio(\n Para pular linha)
 		- Tamanho do Texto
 		- Posição Horizontal do Texto
