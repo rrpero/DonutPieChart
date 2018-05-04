@@ -922,7 +922,8 @@
         //
         this.drawLabelsList = function ()
         {
-            var segment      = this.angles[i],
+           // console.log(this.angles);
+			var segment      = this.angles[i],
                 labels       = prop['chart.labels'],
                 labels_right = [],
                 labels_left  = [],
@@ -942,20 +943,23 @@
 
 
 
-
             //
             // Draw the right hand side labels first
             //
+
             for (var i=0; i<this.angles.length; ++i) {
 
-                var angle          = this.angles[i][0] + ((this.angles[i][1] - this.angles[i][0]) / 2), // Midpoint
-                    endpoint_inner = RG.getRadiusEndPoint(centerx, centery, angle, radius + 5),
+                var angle          = this.angles[i][0] + ((this.angles[i][1] - this.angles[i][0]) / 2);
+				// Midpoint
+				//angle=angle+(Math.PI/8);
+                 var   endpoint_inner = RG.getRadiusEndPoint(centerx, centery, angle, radius + 5),
                     endpoint_outer = RG.getRadiusEndPoint(centerx, centery, angle, radius + 10),
                     explosion      = [
                         (typeof prop['chart.exploded'] === 'number' ? prop['chart.exploded'] : prop['chart.exploded'][i]),
                         (ma.cos(angle) * (typeof prop['chart.exploded'] === 'number' ? prop['chart.exploded'] : prop['chart.exploded'][i])),
                         (ma.sin(angle) * (typeof prop['chart.exploded'] === 'number' ? prop['chart.exploded'] : prop['chart.exploded'][i]))
                     ]
+					//console.log(angle);
 
                 
                 //
@@ -970,9 +974,9 @@
                 }
 
                 
-                
+		        if (angle > (-1 * RG.HALFPI) && angle < RG.HALFPI) {
 
-                if (angle > (-1 * RG.HALFPI) && angle < RG.HALFPI) {
+		
                     labels_right.push([
                         i,
                         angle,

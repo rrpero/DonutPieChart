@@ -232,13 +232,15 @@ define( [
 				var measPercArray = (parseFloat(measArrayNum[i])/total)*100;
 				
 				originAcc=originAcc+(2*(Math.PI*(parseFloat(measArrayNum[i])/total)));
+				//console.log(dimArray[i]+"  originAcc: "+originAcc);
 				if(dimArray[i]==layout.rotateUpFor){
 					origin = 
-					-1.57
+					-(Math.PI/2)
 					-(originAcc
 					-(Math.PI*(parseFloat(measArrayNum[i])/total))
 					//*(i+1)
 					);
+					//origin=-origin%Math.PI;
 				}
 				
 				
