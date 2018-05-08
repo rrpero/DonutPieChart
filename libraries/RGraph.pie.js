@@ -17,7 +17,7 @@
     * 
     * @param data array The data to be represented on the Pie chart
     */
-    RGraph.Pie = function (conf)
+    RGraph.PieV2 = function (conf)
     {
         /**
         * Allow for object config style
@@ -617,7 +617,7 @@
             * Draw the kay if desired
             */
             if (prop['chart.key'] && prop['chart.key'].length) {
-                RG.DrawKey(this, prop['chart.key'], prop['chart.colors']);
+                RG.DrawKeyV2(this, prop['chart.key'], prop['chart.colors']);
             }
     
             RG.NoShadow(this);

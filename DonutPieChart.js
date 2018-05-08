@@ -439,7 +439,7 @@ define( [
 			switch(chartTypeEffect) {
 				// Draws 3d pie chart
 				case "Default":
-					chart = new RGraph.Pie({
+					chart = new RGraph.PieV2({
 						id: tmpCVSID,
 						data: measArrayNum,
 						options: {
@@ -508,7 +508,7 @@ define( [
 
 					// Draws Halo chart	
 					case "Halo":
-					chart = new RGraph.Pie({
+					chart = new RGraph.PieV2({
 						id: tmpCVSID,
 						data: measArrayNum,
 						options: {

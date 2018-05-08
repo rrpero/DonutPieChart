@@ -30,8 +30,8 @@
     * @param array  key An array of the texts to be listed in the key
     * @param colors An array of the colors to be used
     */
-    RG.drawKey =
-    RG.DrawKey = function (obj, key, colors)
+    RG.drawKeyV2 =
+    RG.DrawKeyV2 = function (obj, key, colors)
     {
         if (!key) {
             return;
@@ -104,7 +104,7 @@
         * @param array  key The key items to draw
         * @param array colors An aray of colors that the key will use
         */
-        function DrawKey_graph (obj, key, colors)
+        function DrawKey_graphV2 (obj, key, colors)
         {
             var text_size   = typeof(prop['chart.key.text.size']) == 'number' ? prop['chart.key.text.size'] : prop['chart.text.size'],
                 text_italic = prop['chart.key.text.italic'] ?  true : false,
@@ -386,7 +386,7 @@
         * @param array  key The key items to draw
         * @param array colors An aray of colors that the key will use
         */
-        function DrawKey_gutter (obj, key, colors)
+        function DrawKey_gutterV2 (obj, key, colors)
         {
             var text_size    = typeof(prop['chart.key.text.size']) == 'number' ? prop['chart.key.text.size'] : prop['chart.text.size'],
                 text_bold    = prop['chart.key.text.bold'],
@@ -653,9 +653,9 @@
 
 
         if (keypos && keypos == 'gutter') {
-            DrawKey_gutter(obj, key, colors);
+            DrawKey_gutterV2(obj, key, colors);
         } else if (keypos && keypos == 'graph') {
-            DrawKey_graph(obj, key, colors);
+            DrawKey_graphV2(obj, key, colors);
         } else {
             alert('[COMMON] (' + obj.id + ') Unknown key position: ' + keypos);
         }
