@@ -3,11 +3,71 @@ Ruben Albuquerque
 Donut/PieChart Chart using RGraph with options  to  customize
 
 */
+
+requirejs.config({
+//    context: requirejs.s.contexts.sense ? "sense" : null,
+    paths: {
+        "RGraph": "../extensions/DonutPieChart/libraries/RGraph.common.core",
+		"RGraph.common.dynamic": "../extensions/DonutPieChart/libraries/RGraph.common.dynamic",
+		"RGraph.common.tooltips": "../extensions/DonutPieChart/libraries/RGraph.common.tooltips",
+		"RGraph.common.resizing": "../extensions/DonutPieChart/libraries/RGraph.common.resizing",	
+		"RGraph.drawing.text": "../extensions/DonutPieChart/libraries/RGraph.drawing.text",		
+		"RGraph.drawing.rect": "../extensions/DonutPieChart/libraries/RGraph.drawing.rect",		
+		"RGraph.pie": "../extensions/DonutPieChart/libraries/RGraph.pie",			
+		"RGraph.common.key": "../extensions/DonutPieChart/libraries/RGraph.common.key"
+    },
+  /*  shim: {
+        "RGraph": {
+         //   deps: ["RGraph.rose"],
+            exports: "RGraph"
+        },		
+        "RGraph.common.dynamic": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.common.tooltips": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.common.resizing": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.drawing.text": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.drawing.rect": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.pie": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        },
+        "RGraph.common.key": {
+           deps: ["RGraph"]
+           //, exports: "RGraph"
+        }
+    },*/
+    waitSeconds: 60
+})
+
+
 define( [
 		'jquery'
 		,'qlik'
         ,'./properties/properties'
 		,'./properties/initialProperties'
+		,'RGraph'
+		,'RGraph.common.dynamic'
+		,'RGraph.common.tooltips'
+		,'RGraph.common.resizing'
+		,'RGraph.drawing.text'
+		,'RGraph.drawing.rect'
+		,'RGraph.pie'  
+		,'RGraph.common.key'
+		/*	
 		,'./libraries/RGraph.common.core'
 		,'./libraries/RGraph.common.dynamic'
 		,'./libraries/RGraph.common.tooltips'
@@ -15,7 +75,10 @@ define( [
 		,'./libraries/RGraph.drawing.text'
 		,'./libraries/RGraph.drawing.rect'
 		,'./libraries/RGraph.pie'  
-		,'./libraries/RGraph.common.key'
+		,'./libraries/RGraph.common.key'		
+		*/
+		
+		,'./libraries/rainbowvis'
 		
     ],
 	
@@ -116,10 +179,26 @@ define( [
 			var measArrayText =[];
 			var total= 0;
 			var palette =["RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)","RGB(141,170,203)","RGB(252,115,98)","RGB(187,216,84)","RGB(255,217,47)","RGB(102,194,150)","RGB(229,182,148)","RGB(231,138,210)","RGB(179,179,179)","RGB(166,216,227)","RGB(171,233,188)","RGB(27,125,156)","RGB(255,191,201)","RGB(77,167,65)","RGB(196,178,214)","RGB(178,36,36)","RGB(0,172,172)","RGB(190,108,44)","RGB(105,84,150)","RGB(80,160,240)","RGB(240,160,80)"];	
-
-
+			var numberOfItems = numberOfDimValues;
+			var rainbow = new Rainbow(); 
+			rainbow.setNumberRange(0, numberOfItems);
+			
+			
+			function  getPalette(rainbowP){
+				var s = [];
+				for (var i = 0; i <= numberOfItems; i++) {
+					var hexColour = rainbowP.colourAt(i);
+					s[i]= '#' + hexColour;
+				}
+				return  s;
+			}
 
 			var	paletteBlue=["#051D5C","#0F2662","#193068","#23396E","#2D4374","#374C7A","#415680","#4C5F86","#56698C","#607292","#6A7C98","#74859E","#7E8FA4","#8998AA","#93A2B0","#9DABB6","#A7B5BC","#B1BEC2","#BBC8C8","#C5D2CF"];
+			
+			
+
+			rainbow.setSpectrum('#051D5C','#2D4374','#56698C','#8998AA', '#C5D2CF');
+			paletteBlue=getPalette(rainbow);
 			var paletteGreen=["#034502","#0D4C0C","#185316","#225B20","#2D622B","#376A35","#42713F","#4C784A","#578054","#61875E","#6C8F69","#769673","#819E7D","#8BA588","#96AC92","#A0B49C","#ABBBA7","#B5C3B1","#C0CABB","#CBD2C6"];
 			var paletteRed=["#940005","#97090D","#9B1216","#9F1C1F","#A32528","#A62E31","#AA383A","#AE4142","#B24A4B","#B65454","#B95D5D","#BD6766","#C1706F","#C57977","#C98380","#CC8C89","#D09592","#D49F9B","#D8A8A4","#DCB2AD"];
 			
@@ -412,7 +491,8 @@ define( [
 			//console.log(testRadius);
 			//layout.chartRadius = (layout.chartRadius/300)*testRadius;
 			//testRadius=(layout.chartRadius/300)*testRadius;
-			RGraph.Reset(document.getElementById(tmpCVSID));
+			//RGraph.Reset(document.getElementById(tmpCVSID));
+
 
 			//console.log(testDonut);
 			//console.log(testRadius);
@@ -454,7 +534,7 @@ define( [
 							halign: 'center',
 							strokestyle: segmentBorder2,
 							tooltips: labelDimMeasArray,
-							tooltipsEvent: 'onmousemove',
+							tooltipsEvent: 'mousemove',
 							/*Nao  funciona  ainda
 							tooltipsOverride: tooltip_override,
 							*/								
@@ -495,12 +575,7 @@ define( [
 							//eventsMousemove: onMouseMove,
 						}
 					});
-					//var animation=true;
-					if(layout.animation)//.grow();
-						chart.roundRobin({frames: 30});
-					else
-						chart.draw();
-					//.draw();
+
 					
 
 					
@@ -522,7 +597,7 @@ define( [
 							textColor: '#9fcfff',
 							strokestyle: segmentBorder2,
 							tooltips: labelDimMeasArray,
-							tooltipsEvent: 'onmousemove',										
+							tooltipsEvent: 'mousemove',										
 							labels: labelsArray,
 							key:layout.showLegends ? dimArray: null,
 							keyHalign:layout.keyHalign,
@@ -576,11 +651,7 @@ define( [
 
 							});
 							
-					if(layout.animation)//.grow();
-						chart.roundRobin({frames: 30});
-					else
-						chart.draw();
-							//.draw();
+			
 							
 	
 								
@@ -588,9 +659,6 @@ define( [
 				
 					
 			}
-			
-	
-			
 			chart.canvas.onmouseout = function (e)
 			{
 				// Hide the tooltip
@@ -598,7 +666,14 @@ define( [
 				
 				// Redraw the canvas so that any highlighting is gone
 				RGraph.redraw();
-			}
+			}			
+			//var animation=true;
+			if(layout.animation)//.grow();
+				chart.roundRobin({frames: 30});
+			else
+				chart.draw();
+			
+			//RGraph.redraw();
 			//console.log(layout.colorText.color);
 			if(layout.textMiddle){
 					
@@ -703,6 +778,7 @@ define( [
 			}	
 			
 			// On Mouse Over actions
+			/*
 			function onMouseMove (e, shape)
 			{
 				//console.log("aaa");
@@ -711,8 +787,9 @@ define( [
 				//if(index==1)
 					app.field(dimensionName).toggleSelect(dimArray[index], true);
 				return true;
-			}					
-			
+			}	*/				
+
+					//.draw();
 			//needed for export
 			return qlik.Promise.resolve();
 		}	
