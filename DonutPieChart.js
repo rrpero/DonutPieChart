@@ -493,7 +493,8 @@ define( [
 			//testRadius=(layout.chartRadius/300)*testRadius;
 			//RGraph.Reset(document.getElementById(tmpCVSID));
 
-
+			//if(layout.palette=="paletteBG" && testRadius<200)
+			//	testRadius=200;
 			//console.log(testDonut);
 			//console.log(testRadius);
 			var testDonut=testRadius*0.1*(layout.donutWidth/100);
@@ -636,7 +637,7 @@ define( [
 									'lw 5 b a % % % 0 6.2830 false s white',
 									obj.centerx,
 									obj.centery,
-									obj.radius - 12
+									obj.radius - 12 < 0? 1:obj.radius - 12
 								);
 								/*RGraph.path2(
 									obj.context,

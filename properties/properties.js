@@ -610,10 +610,12 @@ define( [
 			},{
 				value: "greengradient",
 				label: messages[language].GREEN_GRADIENTS
-			},{
+			}
+			//disabled  
+			/*,{
 				value: "paletteBG",
 				label: messages[language].GRADIENTS
-			},{
+			}*/,{
 				value: "yellowwhite",
 				label: messages[language].YELLOW_TRANSPARENCE
 			},{
